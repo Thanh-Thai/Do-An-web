@@ -7,7 +7,9 @@ include "dbcon.php";
 <head>
     <title>Cars Website</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
     <link href="cars-website-template.css" rel="stylesheet" type="text/css"/>
+    <link rel="icon" href="Media/images/wwwicon.jpg">
 </head>
 
 <body>
@@ -39,33 +41,37 @@ include "dbcon.php";
     
     <div id="container">
     <div class="headingbg2"></div>
+    <div class="title" width="10px">Top Cars</div>
+    
     <div id="main">   
-            <div class="title" width="10px">Top Cars</div>
+   
+        <div id="Content_Con">
             <?php 
 			$sql = "SELECT	tblproducts.pID,	tblproducts.pName, tblproducts.pDescript,	tblproducts.pImg, cID, pView	FROM tblproducts"	;
 			$kq = mysqli_query($conn,$sql);
 			while($row = mysqli_fetch_assoc($kq))
 			{
 				?>
-            <div class="PCon">
+            <div class="Pro_Con">
                 <div class="PImg">
-                    <img class='roundcornerimg' width="220px" height="130px" src="<?php echo  $row["pImg"]?>"/>
+                    <img class='roundcornerimg' src="<?php echo  $row["pImg"]?>"/>
                 </div>
                 <div class="desc-Con">
                     <div class="PName">
-                    <?php echo  "Name: ".$row["pName"]; ?>
+                    <?php echo "Name: ".$row["pName"]; ?>
                     </div>
                     <div class="PDesc">
-                    <?php echo  "Descript: ".$row["pDescript"] ?>
+                    <?php echo "Descript: ".$row["pDescript"] ?>
                      </div> 
                     <div class="PView">
-                    <?php echo  "View: ".$row["pView"] ?>
+                    <?php echo "View: ".$row["pView"] ?>
                      </div>
                  </div>   
             </div>
                 <?php
                 }
                 ?>
+        </div>
     </div>
     </div>
       <div id="right">

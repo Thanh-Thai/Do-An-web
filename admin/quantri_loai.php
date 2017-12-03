@@ -32,6 +32,7 @@ $thongbao=null;
 		<?php 
 			$sql = "SELECT * FROM tblcategories";
 			$kq = mysqli_query($conn,$sql);
+		
 			while($row = mysqli_fetch_assoc($kq))
 			{
 				?>
@@ -39,7 +40,7 @@ $thongbao=null;
 					<td><?php echo  $row["cID"]; ?></td>
 					<td><?php echo  $row["cName"] ?></td>
 					<td> 
-						<a href="edit_loai.php?id=<?php echo $row["cID"]; ?>">
+						<a href="edit_loai.php?suaid=<?php echo $row["cID"]; ?>">
 								<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa 
 								</a> | 
 								<a onclick="return confirm('Bạn có chắc chắn không?')" href="delete_loai.php?id=<?php echo  $row["cID"]; ?>">								

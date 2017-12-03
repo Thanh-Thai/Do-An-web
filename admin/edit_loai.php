@@ -1,12 +1,11 @@
 <?php
 include "../dbcon.php";
-$id = 0;
-$id=$_GET[id];
+$ID= $_REQUEST[suaid];
 
 if(isset($_POST["btn_Sua"]))
 {
 
-	$sql = "UPDATE tblcategories set CName = '$_POST[name]' where cID=$id";
+	$sql = "UPDATE tblcategories set CName = '$_POST[name]' where cID=$ID";
 	//Thuc thi va thong bao
 		if(mysqli_query($conn,$sql))
 		{
@@ -18,10 +17,9 @@ if(isset($_POST["btn_Sua"]))
 		}
 }
 
-$sql = "select * from tblcategories where cID = $id";
+$sql = "select * from tblcategories where cID = $ID";
 $kq = mysqli_query($conn,$sql);
 $row = mysqli_fetch_assoc($kq);
-$id = $_GET[id];
  ?>
 <!DOCTYPE html>
 <html>
@@ -50,7 +48,7 @@ $id = $_GET[id];
 				Tên Loại
 			</td>
 			<td>
-				<input type="text" name="name" value="<?php echo $row["CName"] ?>" />
+				<input type="text" name="name" value="<?php echo $row["cName"] ?>" />
 			</td>
 		</tr>
 		<tr>
