@@ -1,0 +1,25 @@
+div
+{
+	padding: 10px;
+}
+.container
+{
+	width: 1000px;
+	margin: auto;
+	border: 1px solid blue;
+}
+.header
+{
+	border: 1px solid blue;
+	height: 100px;
+}
+.menu
+{
+	border: 1px solid blue;
+	height: 30px;
+}
+.content
+{
+	border: 1px solid blue;
+	min-height: 300px;
+}
