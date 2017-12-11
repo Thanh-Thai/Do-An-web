@@ -1,74 +1,4 @@
 <?php
-	session_start();
-
-	if(!isset($_SESSION["hoten"]))
-	{
-		header("location:login.php");
-		die();
-	}
-		include "../dbcon.php";
-
-$id = $_GET["id"];	
-$thongbao=null;
-$sql="SELECT * FROM tblproducts WHERE pID=$id";
-$kq_edit = mysqli_query($conn,$sql);
-$row_edit=mysqli_fetch_assoc($kq_edit);
-
-if(isset($_POST["btn_Sua"]))
-{
-	$name = $_POST["name"];
-	$noidung = $_POST["noidung"];
-
-	$year=$_POST["year"];
-
-	$color=$_POST["color"];
-
-	$price=$_POST["price"];
-
-	$temp = $_FILES["hinh"]["tmp_name"];
-	$hinhname = $_FILES["hinh"]["name"];
-	$handle = fopen($_FILES["hinh"]["tmp_name"], 'r');
-	move_uploaded_file($temp, "../Media/images/".$hinhname);
-
-	$temp1 = $_FILES["spec_img"]["tmp_name"];
-	$spec_imgname = $_FILES["spec_img"]["name"];
-	$handle_specs = fopen($_FILES["spec_img"]["tmp_name"], 'r');
-	move_uploaded_file($temp1, "../Media/images/".$spec_imgname);
-
-
-	$loai_id=$_POST["theloai_id"];
-
-	$status=$_POST["status"];
-
-	$nsx_id=$_POST["nsx_id"];
-
-	$sql="
-	UPDATE `tblproducts` 
-	SET `pName`='$name',
-	`pDescript`='$noidung',
-	`pYear`='$year',
-	`pColor`='$color',
-	`pPrice`='$price',
-	`pImg`='Media/images/$hinhname',
-	`cateID`='$loai_id',
-	`pStatus`='$status',
-	`mafacID`='$nsx_id',
-	`pSpecs`='Media/images/spec_$spec_imgname'
-
-	WHERE `tblproducts`.`pID`=$id";
-	if(mysqli_query($conn,$sql))
-	{
-		$thongbao= "Sửa thành công";
-		header('location:quantri_xe.php');
-	}
-	else
-	{
-		$thongbao= "Sửa thất bại";
-		echo mysqli_error($conn);
-	}
-}
-?>
-<?php
 session_start();
 
 if(!isset($_SESSION["hoten"]))
@@ -92,7 +22,7 @@ $thongbao=null;
 	<link href="css/datepicker3.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
 	<link href="style.css" rel="stylesheet">
-	
+	<script src="http://code.jquery.com/jquery.js"></script>
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 	<!--[if lt IE 9]>
@@ -195,16 +125,16 @@ $thongbao=null;
 				<em class="fa fa-navicon">&nbsp;</em> Table <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
 			</a>
 			<ul class="children collapse" id="sub-item-1">
-				<li><a class="" href="#">
+				<li><a class="" href="quantri_loai.php">
 					<span class="fa fa-arrow-right">&nbsp;</span> Loại Xe
 				</a></li>
-				<li><a class="" href="#">
+				<li><a class="" href="quantri_hang.php">
 					<span class="fa fa-arrow-right">&nbsp;</span> Hãng Sản Xuất
 				</a></li>
-				<li><a class="" href="#">
+				<li><a class="" href="quantri_xe.php">
 					<span class="fa fa-arrow-right">&nbsp;</span> Sản Phẩm
 				</a></li>
-				<li><a class="" href="#">
+				<li><a class="" href="quantri_tin.php">
 					<span class="fa fa-arrow-right">&nbsp;</span> Tin Tức
 				</a></li>
 			</ul>
@@ -214,135 +144,56 @@ $thongbao=null;
 </div><!--/.sidebar-->
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+	<div class="row">	
+		<div class="alert bg-success hidden" id="alertsc" role="alert">
+			<em class="fa fa-lg fa-info">&nbsp;<?php echo $thongbao ?></em> 
+			<a href="#" class="pull-right">
+				<em class="fa fa-lg fa-close"></em>
+			</a>
+		</div>
+	</div>
 	<div class="row">
 		<ol class="breadcrumb">
 			<li><a href="index.php">
 				<em class="fa fa-home"></em>
 			</a></li>
-			<li class="active">Quản Trị Xe</li>
+			<li class="active"><a href="quantri_loai.php">Quản Trị Hãng Xe</a></li>
+			<button type="button" class="btn btn-md btn-default" style="float: right; padding: 0px"><a href="add_loai.php">Thêm</a></button>
 		</ol>
 	</div><!--/.row-->
 	<div class="row">
-		<form action="" method="post" enctype="multipart/form-data">
+		<table cellpadding="20" style="width: 99%;margin: auto;margin-left: 10px" border="0">
+			<tbody style="margin-bottom: 100px;">
+			<tr>
+				<th>ID Hãng</th>
+				<th>Tên Hãng</th>
+				<th>Công cụ</th>
+			</tr>
+			<?php 
+			$sql = "SELECT * FROM tblmf";
+			$kq = mysqli_query($conn,$sql);
 
-				<table>
+			while($row = mysqli_fetch_assoc($kq))
+			{
+				?>
+				<tr>
+					<td><?php echo  $row["mfID"]; ?></td>
+					<td><?php echo  $row["mfName"] ?></td>
+					<td> 
+						<a href="edit_loai.php?suaid=<?php echo $row["mfID"]; ?>">
+							<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa 
+						</a> | 
+						<a onclick="return confirm('Bạn có chắc chắn không?')" href="delete_loai.php?id=<?php echo  $row["mfID"]; ?>">								
+							<i class="fa fa-trash" aria-hidden="true"></i> Xóa
+						</a>
+					</td>
+				</tr>
+				<?php
+			}
+			?>
 
-					<tr>
-						<td>
-							ID Loại của xe <?php echo $id ?> là :<?php echo $row_edit["cateID"] ?>
-
-						</td>
-						<td>
-							<select name="theloai_id">
-								<?php 
-								$sql1="SELECT * FROM tblcategories";
-								$kq=mysqli_query($conn,$sql1);
-								while($row=mysqli_fetch_assoc($kq)){
-									?>
-									<option 
-									<?php
-									if($row_edit["cateID"]==$row["cID"]) 
-										echo "selected";
-									?>
-									value="<?php echo $row["cID"];?>"><?php echo $row["cName"];?>
-								</option>
-								<?php } ?>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>Tên Xe:</td>
-						<td><input type="text" value="<?php echo $row_edit["pName"];?>" name="name"/></td>
-					</tr>
-					<tr>
-						<td>Nội dung</td>
-						<td><textarea  name="noidung" style="width: 500px;height: 400px"><?php echo $row_edit["pDescript"];?></textarea></td>
-					</tr>	
-
-					<tr>
-						<td>Năm Sản Xuất:</td>
-						<td><input type="text" name="year" value="<?php echo $row_edit["pYear"];?>" /></td>
-					</tr>
-					<tr>
-						<td>Màu:</td>
-						<td><input type="text" name="color" value="<?php echo $row_edit["pColor"];?>" /></td>
-					</tr>	
-					<tr>
-						<td>Giá:</td>
-						<td><input type="text" name="price" value="<?php echo $row_edit["pPrice"];?>" /></td>
-					</tr>	
-					<tr>
-						<td>Hình</td>
-						<td><img width="300px" height="200px" src="../<?php echo $row_edit["pImg"];?>"></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><input type="file" name="hinh" value="<?php echo $row_edit["pImg"];?>"></td>
-					</tr>
-					<tr>
-						<td>Tình trạng:</td>
-						<td>
-							<select name="status">
-								<?php 
-								$sql2="SELECT * FROM tblstatus";
-								$kq=mysqli_query($conn,$sql2);
-								while($row=mysqli_fetch_assoc($kq)){ ?>
-								<option
-								<?php
-
-									if($row_edit["pStatus"]==$row["sID"]) 
-										echo "selected";
-									?>
-									value="<?php echo $row["sID"];?>"><?php echo $row["sName"];?>
-						
-								</option>
-								<?php
-
-								 } 
-								 ?>
-							</select>
-						</td>
-					</tr>		
-					<tr>
-						<td>
-							Nhà Sản Xuất:
-						</td>
-						<td>
-							<select name="nsx_id">
-								<?php 
-								$sql3="SELECT * FROM tblmf";
-								$kq=mysqli_query($conn,$sql3);
-								while($row=mysqli_fetch_assoc($kq)){ ?>
-								<option 
-								<?php
-									if($row_edit["mafacID"]==$row["mfID"]) 
-										echo "selected";
-									?>
-									value="<?php echo $row["mfID"];?>"><?php echo $row["mfName"];?>
-										
-									</option>
-								<?php } ?>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>Thông số (Img):</td>
-						<td><img width="300px" height="200px" src="../<?php echo $row_edit["pSpecs"];?>"></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>
-							<input type="file" name="spec_img" value="<?php echo $row_edit["pSpecs"];?>"></td>
-						</tr>	
-						<tr>
-							<td colspan="2">
-								<input type="submit" name="btn_Sua" value="Sửa">
-							</td>			
-						</tr>
-
-					</table>
-
-				</form>
+</tbody>
+		</table>
 	</div>
 </div>
 <script src="js/jquery-1.11.1.min.js"></script>
@@ -366,4 +217,3 @@ $thongbao=null;
 
 </body>
 </html>
-			
