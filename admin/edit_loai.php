@@ -1,6 +1,14 @@
 <?php
-include "../dbcon.php";
-$ID= $_REQUEST[suaid];
+	session_start();
+
+	if(!isset($_SESSION["hoten"]))
+	{
+		header("location:login.php");
+		die();
+	}
+		include "../dbcon.php";
+
+$ID= $_GET['suaid'];
 
 if(isset($_POST["btn_Sua"]))
 {

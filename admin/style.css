@@ -1,22 +1,39 @@
+body{
+    
+}
 div
 {
 	padding: 10px;
 }
 .container
 {
-	width: 1000px;
+	width: 100%;
 	margin: auto;
 	border: 1px solid blue;
+    
+    
 }
 .header
 {
 	border: 1px solid blue;
 	height: 100px;
+	background-image: url(../Media/img/admin/background.jpg);
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.header p{
+    line-height: 10px;
+    color: white;
 }
 .menu
 {
 	border: 1px solid blue;
 	height: 30px;
+    background-image: url(../Media/img/admin/background1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 .content
 {
