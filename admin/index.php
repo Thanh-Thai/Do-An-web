@@ -5,6 +5,7 @@
 	if(!isset($_SESSION["hoten"]))
 	{
 		header("location:login.php");
+		die();
 	}
  ?>
 <!DOCTYPE html>
@@ -17,12 +18,12 @@
 
 <div class="container">
 	<div class="header">
-	TRANG ADMIN
+	<p>TRANG ADMIN</p>
 	<br>
-	Chào Anh <?php echo $_SESSION["hoten"] ?>
-	</div>
+	<p>Chào Anh <?php echo $_SESSION["hoten"] ?></p>
+    </div>
 	<div class="menu">
-	<a href ="index.php" >Trang chủ</a> | <a href="quantri_loai.php">Quản trị loại xe</a> | <a href="quantri_xe.php">Quản trị xe</a>
+	<a href ="index.php" >Trang chủ</a> | <a href="quantri_loai.php">Quản trị loại xe</a> | <a href="quantri_xe.php">Quản trị xe</a> | <a href="logout.php">Logout</a>
 	</div>
 	<div class="content">
 	Hiện có : 

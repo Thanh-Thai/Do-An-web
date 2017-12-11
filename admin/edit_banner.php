@@ -1,5 +1,13 @@
 <?php
-include "../dbcon.php";
+	session_start();
+
+	if(!isset($_SESSION["hoten"]))
+	{
+		header("location:login.php");
+		die();
+	}
+		include "../dbcon.php";
+
 $idbn = $_GET["idbn"];
 $sql="SELECT * FROM banner WHERE idbn=$idbn";
 $kq1=mysql_query($sql);

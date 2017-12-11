@@ -1,157 +1,218 @@
 <?php
-include "../dbcon.php";
-$id = $_GET["id"];	
+	session_start();
 
-$sql="SELECT * FROM news WHERE id=$id";
-$kq_edit = mysql_query($sql);
-$row_edit=mysql_fetch_assoc($kq_edit);
+	if(!isset($_SESSION["hoten"]))
+	{
+		header("location:login.php");
+		die();
+	}
+		include "../dbcon.php";
+
+$id = $_GET["id"];	
+$thongbao=null;
+$sql="SELECT * FROM tblproducts WHERE pID=$id";
+$kq_edit = mysqli_query($conn,$sql);
+$row_edit=mysqli_fetch_assoc($kq_edit);
 
 if(isset($_POST["btn_Sua"]))
 {
 	$name = $_POST["name"];
 	$noidung = $_POST["noidung"];
-	$hinh= $_POST["hinh"];
-	$theloai_id=$_POST["theloai_id"];
-	$sql="UPDATE `news` SET `name`='$name',`noidung`='$noidung',`hinh`='$hinh',`theloai_id`='$theloai_id' WHERE `news`.`id`=$id";
-	if(mysql_query($sql))
+
+	$year=$_POST["year"];
+
+	$color=$_POST["color"];
+
+	$price=$_POST["price"];
+
+	$temp = $_FILES["hinh"]["tmp_name"];
+	$hinhname = $_FILES["hinh"]["name"];
+	$handle = fopen($_FILES["hinh"]["tmp_name"], 'r');
+	move_uploaded_file($temp, "../Media/images/".$hinhname);
+
+	$temp1 = $_FILES["spec_img"]["tmp_name"];
+	$spec_imgname = $_FILES["spec_img"]["name"];
+	$handle_specs = fopen($_FILES["spec_img"]["tmp_name"], 'r');
+	move_uploaded_file($temp1, "../Media/images/".$spec_imgname);
+
+
+	$loai_id=$_POST["theloai_id"];
+
+	$status=$_POST["status"];
+
+	$nsx_id=$_POST["nsx_id"];
+
+	$sql="
+	UPDATE `tblproducts` 
+	SET `pName`='$name',
+	`pDescript`='$noidung',
+	`pYear`='$year',
+	`pColor`='$color',
+	`pPrice`='$price',
+	`pImg`='Media/images/$hinhname',
+	`cateID`='$loai_id',
+	`pStatus`='$status',
+	`mafacID`='$nsx_id',
+	`pSpecs`='Media/images/spec_$spec_imgname'
+
+	WHERE `tblproducts`.`pID`=$id";
+	if(mysqli_query($conn,$sql))
 	{
 		$thongbao= "Sửa thành công";
-		header('location:quantri_tin.php');
+		header('location:quantri_xe.php');
 	}
 	else
 	{
 		$thongbao= "Sửa thất bại";
+		echo mysqli_error($conn);
 	}
 }
- ?>
+?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Admin Page</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
-	<script src="ckeditor/ckeditor.js"></script>
-	<script src="ckfinder/ckfinder.js"></script>
-<script type="text/javascript">
-	function BrowseServer( startupPath, functionData ){
-			var finder = new CKFinder();
-			finder.basePath = 'ckfinder/'; //Đường path nơi đặt ckfinder
-			finder.startupPath = startupPath; //Đường path hiện sẵn cho user chọn file
-			finder.selectActionFunction = SetFileField; // hàm sẽ được gọi khi 1 file được chọn
-			finder.selectActionData = functionData; //id của text field cần hiện địa chỉ hình
-			finder.selectThumbnailActionFunction = ShowThumbnails; //hàm sẽ được gọi khi 1 file thumnail được chọn
-			finder.popup(); // Bật cửa sổ CKFinder
-		} //BrowseServer	
-		function SetFileField( fileUrl, data ){
-			document.getElementById( data["selectActionData"] ).value = fileUrl;			
-		}
-		function ShowThumbnails( fileUrl, data ){
-			var sFileName = this.getSelectedFile().name; // this = CKFinderAPI
-			document.getElementById( 'thumbnails' ).innerHTML +=
-			'<div class="thumb">' +
-			'<img src="' + fileUrl + '" />' +
-			'<div class="caption">' +
-			'<a href="' + data["fileUrl"] + '" target="_blank">' + sFileName + '</a> (' + data["fileSize"] + 'KB)' +
-			'</div>' +
-			'</div>';
-			document.getElementById( 'preview' ).style.display = "";
-			return false; // nếu là true thì ckfinder sẽ tự đóng lại khi 1 file thumnail được chọn
-
-		}
-</script>
 
 </head>
 <body>
 
-<div class="container">
-	<div class="header">
-	TRANG ADMIN
-	</div>
-	<div class="menu">
-	Trang chủ | <a href="quantri_loai.php">Quản trị loại tin</a> | <a href="quantri_tin.php">Quản trị tin</a>
-	</div>
-	<div class="content">
-	<p style="background-color: green;color:white"><?php echo $thongbao ?></p>
-	<form action="" method="post">
-		
-		<table>
-		
-		<tr>
-			<td>
-				Nhập Tên Loại
-			</td>
-			<td>
-			ID Thể Loại của Tin <?php echo $id ?> là : 
-			<?php echo $row_edit["theloai_id"] ?>
-				<select name="theloai_id">
-				<?php 
-				$sql="SELECT * FROM theloai";
-				$kq=mysql_query($sql);
-				while($row=mysql_fetch_assoc($kq)){
-					?>
-					<option  
-					<?php 
-					if($row_edit["theloai_id"]==$row[id]) 
-					echo "selected";
-					?>
-				  value="<?php echo $row[id];?>"><?php echo $row[name];?></option>
-				 <?php } ?>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>Tiêu Đề</td>
-			<td><input type="text" value="<?php echo $row_edit["name"];?>" name="name"/></td>
-		</tr>
-		<tr>
-			<td>Hình</td>
-			<td><input value="<?php echo $row_edit["hinh"];?>" type="text" id="hinh" name="hinh"/><input onclick="BrowseServer('hinhanh:/','hinh')"  type="button" name="btnChonFile" id="btnChonFile" value="Chọn File" /></td>
-			
-		</tr>
-		<tr>
-			<td>Nội dung</td>
-			<td><textarea  name="noidung"><?php echo $row_edit["noidung"];?></textarea></td>
-<script type="text/javascript">
-var editor = CKEDITOR.replace( 'noidung',{
-  filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?Type=Images',
-  filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?Type=Flash',
-  filebrowserImageUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-  filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
-	height: '500px',
-  toolbar:[
-  { name: 'document', items : [ 'Source','-','Templates' ] },
-  { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
-  { name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },
-  { name: 'forms', items : [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
-        'HiddenField' ] },
-  '/',
-  { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
-  { name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv',
-  '-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
-  { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
-  { name: 'insert', items : [ 'Image','MediaEmbed','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe' ] },
-  '/',
-  { name: 'styles', items : [ 'Styles','Format','Font','FontSize' ] },
-  { name: 'colors', items : [ 'TextColor','BGColor' ] },
-  { name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] }
-  ]
-});
-</script>			
-		</tr>				
-		<tr>
-			<td colspan="2">
-				<input type="submit" name="btn_Sua" value="Sửa">
-			</td>			
-		</tr>
-	</table>
+	<div class="container">
+		<div class="header">
+			TRANG ADMIN
+		</div>
+		<div class="menu">
+			<a href ="index.php" >Trang chủ</a> | <a href="quantri_loai.php">Quản trị loại xe</a> | <a href="quantri_xe.php">Quản trị xe</a>
+		</div>
+		<div class="content">
+			<p style="background-color: green;color:white"><?php echo $thongbao ?></p>
+			<form action="" method="post" enctype="multipart/form-data">
 
-	</form>
+				<table>
+
+					<tr>
+						<td>
+							ID Loại của xe <?php echo $id ?> là :<?php echo $row_edit["cateID"] ?>
+
+						</td>
+						<td>
+							<select name="theloai_id">
+								<?php 
+								$sql1="SELECT * FROM tblcategories";
+								$kq=mysqli_query($conn,$sql1);
+								while($row=mysqli_fetch_assoc($kq)){
+									?>
+									<option 
+									<?php
+									if($row_edit["cateID"]==$row["cID"]) 
+										echo "selected";
+									?>
+									value="<?php echo $row["cID"];?>"><?php echo $row["cName"];?>
+								</option>
+								<?php } ?>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>Tên Xe:</td>
+						<td><input type="text" value="<?php echo $row_edit["pName"];?>" name="name"/></td>
+					</tr>
+					<tr>
+						<td>Nội dung</td>
+						<td><textarea  name="noidung" style="width: 500px;height: 400px"><?php echo $row_edit["pDescript"];?></textarea></td>
+					</tr>	
+
+					<tr>
+						<td>Năm Sản Xuất:</td>
+						<td><input type="text" name="year" value="<?php echo $row_edit["pYear"];?>" /></td>
+					</tr>
+					<tr>
+						<td>Màu:</td>
+						<td><input type="text" name="color" value="<?php echo $row_edit["pColor"];?>" /></td>
+					</tr>	
+					<tr>
+						<td>Giá:</td>
+						<td><input type="text" name="price" value="<?php echo $row_edit["pPrice"];?>" /></td>
+					</tr>	
+					<tr>
+						<td>Hình</td>
+						<td><img width="300px" height="200px" src="../<?php echo $row_edit["pImg"];?>"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="file" name="hinh" value="<?php echo $row_edit["pImg"];?>"></td>
+					</tr>
+					<tr>
+						<td>Tình trạng:</td>
+						<td>
+							<select name="status">
+								<?php 
+								$sql2="SELECT * FROM tblstatus";
+								$kq=mysqli_query($conn,$sql2);
+								while($row=mysqli_fetch_assoc($kq)){ ?>
+								<option
+								<?php
+
+									if($row_edit["pStatus"]==$row["sID"]) 
+										echo "selected";
+									?>
+									value="<?php echo $row["sID"];?>"><?php echo $row["sName"];?>
+						
+								</option>
+								<?php
+
+								 } 
+								 ?>
+							</select>
+						</td>
+					</tr>		
+					<tr>
+						<td>
+							Nhà Sản Xuất:
+						</td>
+						<td>
+							<select name="nsx_id">
+								<?php 
+								$sql3="SELECT * FROM tblmf";
+								$kq=mysqli_query($conn,$sql3);
+								while($row=mysqli_fetch_assoc($kq)){ ?>
+								<option 
+								<?php
+									if($row_edit["mafacID"]==$row["mfID"]) 
+										echo "selected";
+									?>
+									value="<?php echo $row["mfID"];?>"><?php echo $row["mfName"];?>
+										
+									</option>
+								<?php } ?>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>Thông số (Img):</td>
+						<td><img width="300px" height="200px" src="../<?php echo $row_edit["pSpecs"];?>"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<input type="file" name="spec_img" value="<?php echo $row_edit["pSpecs"];?>"></td>
+						</tr>	
+						<tr>
+							<td colspan="2">
+								<input type="submit" name="btn_Sua" value="Sửa">
+							</td>			
+						</tr>
+
+					</table>
+
+				</form>
 
 
-	</div>
-</div>
+			</div>
+		</div>
 
 
 
-</body>
-</html>
+	</body>
+	</html>

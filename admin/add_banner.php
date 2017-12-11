@@ -1,5 +1,13 @@
 <?php
-include "../dbcon.php";
+	session_start();
+
+	if(!isset($_SESSION["hoten"]))
+	{
+		header("location:login.php");
+		die();
+	}
+		include "../dbcon.php";
+
 	
 	//Kiem tra co nhat nut hay khong
 	if(isset($_POST["btn_Them"]))

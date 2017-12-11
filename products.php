@@ -47,134 +47,150 @@ include "dbcon.php";
 
     </div>
     <div id="container">
+        <div id="rightp">
+            <div id="quick_heading">Quick Links</div>
+            <div class="quicklinks"><a href="#">Xe nổi bật</a>
+            </div>
+            <div class="quicklinks"><a href="#">Xe bán chạy</a>
+            </div>
+            <div class="quicklinks"><a href="#">Chính sách bảo hành</a>
+            </div>
+            <div class="quicklinks"><a href="#">Tin tức mới</a>
+            </div>
+        </div>
         <div class="headingbg2"></div>
-        <div class="title" width="10px">Sản Phẩm Nổi Bật</div>
+
+        <div class="title" width="10px">Sản Phẩm</div>
+
+        <div id="pmenu">
+            <div class="menu_item"><a href="#spcars">Xe Thể Thao</a>
+            </div>
+            <div class="menu_item"><a href="#suv">Xe SUV</a>
+            </div>
+            <div class="menu_item"><a href="#Comcars">Xe Hơi</a>
+            </div>
+            <div class="menu_item"><a href="#pkcar">Xe Bán Tải</a>
+            </div>
+            <div class="menu_item"><a href="#mpvcar">Xe Đa Dụng</a>
+            </div>
+        </div>
+        <div class="headingbg2"></div>
 
         <div id="main">
             <div id="Content_Con">
-                <?php 
-			$sql = "SELECT	tblproducts.pID,	tblproducts.pName, tblproducts.pDescript,	tblproducts.pImg, cateID, pView	FROM tblproducts WHERE pView>10"	;
-			$kq = mysqli_query($conn,$sql);
-			while($row = mysqli_fetch_assoc($kq))
-			{
-				?>
-                <div class="Pro_Con">
-                    <div class="PImg">
-                        <img class='roundcornerimg' src="<?php echo  $row["pImg"]?>"/>
+                <div class="P_Con_sec">            
+                    <div class="ptitle" id="Comcars">
+                        <span>Xe Hơi</span>
                     </div>
-                    <div class="desc-Con">
-                        <div class="PName">
-                            <?php echo $row["pName"]; ?>
+                    <?php
+                    $sql = "SELECT
+                    tblproducts.pID,
+                    tblproducts.pName,
+                    tblproducts.mafacID,
+                    tblproducts.pImg,
+                    tblmf.mfName
+                    FROM
+                    tblproducts
+                    INNER JOIN tblmf ON tblproducts.mafacID = tblmf.mfID
+                    WHERE
+                    tblproducts.cateID = 3 AND
+                    tblmf.mfID = tblproducts.mafacID";
+                    $kq = mysqli_query( $conn, $sql );
+                    while ( $row = mysqli_fetch_assoc( $kq ) ) {
+                        ?>
+                        <div class="PContainer">
+                            <img class="roundcornerimg1" src="<?php echo $row["pImg"]?>"/>
+                            <div class="pinfo">
+                                <div>Tên: <?php echo $row["mfName"];?> <?php echo $row["pName"];?></div>
+                                <div>Hãng sản xuất: <?php echo $row["mfName"];?></div>
+                            </div>
                         </div>
+                        <?php 
+                    }
+                    ?>
 
+                </div>
+                <div class="P_Con_sec">
+                    <div class="ptitle" id="pkcar">
+                        <span>Xe Bán Tải</span>
                     </div>
                 </div>
-                <?php
-                }
-                ?>
+                <div class="P_Con_sec">
+                    <div class="ptitle" id="spcars">
+                        <span>Xe Thể Thao</span>
+                    </div>
+                    <?php
+                    $sql = "SELECT
+                    tblproducts.pID,
+                    tblproducts.pName,
+                    tblproducts.mafacID,
+                    tblproducts.pImg,
+                    tblmf.mfName
+                    FROM
+                    tblproducts
+                    INNER JOIN tblmf ON tblproducts.mafacID = tblmf.mfID
+                    WHERE
+                    tblproducts.cateID = 2 AND
+                    tblmf.mfID = tblproducts.mafacID";
+                    $kq = mysqli_query( $conn, $sql );
+                    while ( $row = mysqli_fetch_assoc( $kq ) ) 
+                    {
+                        ?>
+                        <div class="PContainer">
+                            <img class="roundcornerimg1" src="<?php echo $row["pImg"]?>"/>
+                            <div class="pinfo">
+                                <div>Tên: <?php echo $row["mfName"];?> <?php echo $row["pName"];?></div>
+                                <div>Hãng sản xuất: <?php echo $row["mfName"];?></div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                    
+                </div>
+                <div class="P_Con_sec">
+                    <div class="ptitle" id="suv">
+                        <span>Xe SUV</span>
+                    </div>
+                        <?php
+                    $sql = "SELECT
+                    tblproducts.pID,
+                    tblproducts.pName,
+                    tblproducts.mafacID,
+                    tblproducts.pImg,
+                    tblmf.mfName
+                    FROM
+                    tblproducts
+                    INNER JOIN tblmf ON tblproducts.mafacID = tblmf.mfID
+                    WHERE
+                    tblproducts.cateID = 1 AND
+                    tblmf.mfID = tblproducts.mafacID";
+                    $kq = mysqli_query( $conn, $sql );
+                    while ( $row = mysqli_fetch_assoc( $kq ) ) 
+                    {
+                        ?>
+                        <div class="PContainer">
+                            <img class="roundcornerimg1" src="<?php echo $row["pImg"]?>"/>
+                            <div class="pinfo">
+                                <div>Tên: <?php echo $row["mfName"];?> <?php echo $row["pName"];?></div>
+                                <div>Hãng sản xuất: <?php echo $row["mfName"];?></div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                    
+                </div>
+                <div class="P_Con_sec">
+                    <div class="ptitle" id="mpvcar">
+                        <span>Xe Đa Dụng</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div id="right">
-        <div id="quick_heading">Quick Links</div>
-        <div class="quicklinks"><a href="#">Xe nổi bật</a>
-        </div>
-        <div class="quicklinks"><a href="#">Xe bán chạy</a>
-        </div>
-        <div class="quicklinks"><a href="#">Chính sách bảo hành</a>
-        </div>
-        <div class="quicklinks"><a href="#">Tin tức mới</a>
-        </div>
-    </div>
     <div class="headingbg3"></div>
-    <div class="last">
-        <div class="box container_sec">
-            <ul>
-                <li class="one-third column">
-                    <div class="cate_li box_content">
-                        <h3 class="box_Tab_index">Tin Tức</h3>
-                        <ul id="news_index">
-                            <?php
-                            $sql_news = "SELECT	nID, nTitle, nContent,	nImg, nView	FROM tblnews";
-                            $kq_news = mysqli_query( $conn, $sql_news );
-                            while ( $row_news = mysqli_fetch_assoc( $kq_news ) ) {
-                                ?>
-                            <li>
-                                <a href="#"> 
-                                <img class="img_general" src="<?php echo  $row_news["nImg"]?>" alt="<?php echo  $row_news["nTitle"]?>" width="75" height="50"/>
-                            </a>
-                            
-
-
-
-                                <h2 class="news_Title"> 
-                                <a href="/tin-tuc/honda-viet-nam-chinh-thuc-gioi-thieu-odyssey-2017-moi-tron-tien-nghi-xung-dang-cap.aspx"> <?php echo  $row_news["nTitle"]?></a>
-                            </h2>
-                            </li>
-                            <?php
-                            }
-                            ?>
-                        </ul>
-                    </div>
-                </li>
-                <li class="one-third column">
-                    <div class="cate_li box_content">
-                        <h3 class="box_Tab_index">Dịch vụ</h3>
-                        <ul id="services">
-                            <li><a href="baoduong.php"><span class="service s01"></span>
-            <h4> Bão dưỡng định kỳ</h4>
-            </a>
-                            </li>
-                            <li><a href="baohiem.php"><span class="service s02"></span>
-            <h4> Bảo hiểm</h4>
-            </a>
-                            </li>
-                            <li><a href="suachuatq.php"><span class="service s03"></span>
-            <h4> Sửa chữa tổng quát</h4>
-            </a>
-                            </li>
-                            <li><a href="baohanh.php"><span class="service s04"></span>
-            <h4> Gia hạn bảo hành</h4>
-            </a>
-                            </li>
-                            <li><a href="suachuathan.php"><span class="service s05"></span>
-            <h4> Sửa chữa thân vỏ</h4>
-            </a>
-                            </li>
-                            <li><a href="chámocxe.php"><span class="service s06"></span>
-            <h4> Chăm sóc xe</h4>
-            </a>
-                            </li>
-                            <li><a href="phutungphukien.php"><span class="service s07"></span>
-            <h4> Phụ tùng - Phụ kiện</h4>
-            </a>
-                            </li>
-                            <li><a href="dichvu.php"><span class="service s08"></span>
-            <h4> Đặt hẹn dịch vụ</h4>
-            </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="one-third column">
-                    <div class="cate_li box_content">
-                        <h3 class="box_Tab_index">Video</h3>
-                        <div class="hot_video">
-                            <p>
-                                <div class="youtubevideowrap">
-                                    <div class="videoWrapper">
-                                        <a src="https://www.youtube.com/embed/Yx45AXkSQQg" width="480" height="270"></a>
-                                    </div>
-                                </div>
-                            </p>
-                        </div>
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-    </div>
-    <footer>
+     <footer>
         <div class="box">
             <div class="ten columns info_footer">
                 <p style="float: left;"><span style="font-family: arial, helvetica, sans-serif; font-size: small;"><strong>&nbsp;</strong></span>
@@ -228,7 +244,9 @@ include "dbcon.php";
                     <br/>
                 </div>
             </div>
+
         </div>
     </footer>
 </body>
+
 </html>
