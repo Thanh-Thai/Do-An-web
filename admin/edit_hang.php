@@ -8,8 +8,26 @@ if(!isset($_SESSION["hoten"]))
 }
 include "../dbcon.php";
 
-$thongbao=null;
+$ID= $_GET['suaid'];
 
+if(isset($_POST["btn_Sua"]))
+{
+
+	$sql = "UPDATE tblmf set mfName = '$_POST[name]' where mfID=$ID";
+	//Thuc thi va thong bao
+	if(mysqli_query($conn,$sql))
+	{
+		header("location:quantri_hang.php");
+	}
+	else
+	{
+		echo "Thất bại";
+	}
+}
+
+$sql = "select * from tblmf where mfID = $ID";
+$kq = mysqli_query($conn,$sql);
+$row = mysqli_fetch_assoc($kq);
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,7 +40,7 @@ $thongbao=null;
 	<link href="css/datepicker3.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
 	<link href="style.css" rel="stylesheet">
-	<script src="http://code.jquery.com/jquery.js"></script>
+	
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 	<!--[if lt IE 9]>
@@ -144,56 +162,44 @@ $thongbao=null;
 </div><!--/.sidebar-->
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-	<div class="row">	
-		<div class="alert bg-success hidden" id="alertsc" role="alert">
-			<em class="fa fa-lg fa-info">&nbsp;<?php echo $thongbao ?></em> 
-			<a href="#" class="pull-right">
-				<em class="fa fa-lg fa-close"></em>
-			</a>
-		</div>
-	</div>
 	<div class="row">
 		<ol class="breadcrumb">
 			<li><a href="index.php">
 				<em class="fa fa-home"></em>
 			</a></li>
-			<li class="active"><a href="quantri_loai.php">Quản Trị Hãng Xe</a></li>
-			<button type="button" class="btn btn-md btn-default" style="float: right; padding: 0px"><a href="add_hang.php">Thêm</a></button>
+			 <li class="active"><a href="quantri_loai.php">Quản Trị Loại Xe</a></li>
+            <li class="active"><a href="edit_loai.php">Sửa loại xe</a></li>
 		</ol>
 	</div><!--/.row-->
 	<div class="row">
-		<table cellpadding="20" style="width: 99%;margin: auto;margin-left: 10px" border="0">
-			<tbody style="margin-bottom: 100px;">
-			<tr>
-				<th>ID Hãng</th>
-				<th>Tên Hãng</th>
-				<th>Công cụ</th>
-			</tr>
-			<?php 
-			$sql = "SELECT * FROM tblmf";
-			$kq = mysqli_query($conn,$sql);
+		<form action="" method="post">
 
-			while($row = mysqli_fetch_assoc($kq))
-			{
-				?>
+			<table>
+
 				<tr>
-					<td><?php echo  $row["mfID"]; ?></td>
-					<td><?php echo  $row["mfName"] ?></td>
-					<td> 
-						<a href="edit_hang.php?suaid=<?php echo $row["mfID"]; ?>">
-							<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa 
-						</a> | 
-						<a onclick="return confirm('Bạn có chắc chắn không?')" href="delete_hang.php?id=<?php echo  $row["mfID"]; ?>">								
-							<i class="fa fa-trash" aria-hidden="true"></i> Xóa
-						</a>
+					<td>
+						Mã Hãng: 
+					</td>
+					<td>
+						<input type="text" disabled="true" class="form-control" name="id" value="<?php echo $row["mfID"]?>" />
 					</td>
 				</tr>
-				<?php
-			}
-			?>
+				<tr>
+                    <td>
+                        Nhập Tên Hãng:
+                    </td>
+                    <td>
+                        <input type="text" name="name" value="<?php echo $row["mfName"]?>" /></td>
+                </tr>
+				<tr>
+					<td colspan="2">
+						<input type="submit" class="btn btn-primary" name="btn_Sua" value="Sửa">
+					</td>			
+				</tr>
+			</table>
 
-</tbody>
-		</table>
+		</form>
+
 	</div>
 </div>
 <script src="js/jquery-1.11.1.min.js"></script>

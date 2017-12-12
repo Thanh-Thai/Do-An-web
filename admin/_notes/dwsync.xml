@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="style.css" server="C:/wamp64/www/" local="131567934388925204" remote="131567934380000000" Dst="0" />
-<file name="index.php" server="C:/wamp64/www/" local="131567933746043773" remote="131567933740000000" Dst="0" />
-<file name="quantri_xe.php" server="C:/wamp64/www/" local="131567935849413228" remote="131567935840000000" Dst="0" />
-<file name="quantri_loai.php" server="C:/wamp64/www/" local="131567934386713744" remote="131567934380000000" Dst="0" />
+<file name="add_banner.php" server="C:/wamp64/www/" local="131573668440000000" remote="131573668440000000" Dst="0" />
+<file name="add_hang.php" server="C:/wamp64/www/" local="131573828490000000" remote="131573828490000000" Dst="0" />
+<file name="add_loai.php" server="C:/wamp64/www/" local="131573820590000000" remote="131573820590000000" Dst="0" />
+<file name="add_xe.php" server="C:/wamp64/www/" local="131574517900000000" remote="131574517900000000" Dst="0" />
+<file name="delete_banner.php" server="C:/wamp64/www/" local="131573668440000000" remote="131573668440000000" Dst="0" />
+<file name="delete_hang.php" server="C:/wamp64/www/" local="131573829200000000" remote="131573829200000000" Dst="0" />
+<file name="delete_loai.php" server="C:/wamp64/www/" local="131573813520000000" remote="131573813520000000" Dst="0" />
+<file name="delete_xe.php" server="C:/wamp64/www/" local="131573668200000000" remote="131573668200000000" Dst="0" />
+<file name="edit_banner.php" server="C:/wamp64/www/" local="131573670380000000" remote="131573670380000000" Dst="0" />
+<file name="edit_hang.php" server="C:/wamp64/www/" local="131573832940000000" remote="131573832940000000" Dst="0" />
+<file name="edit_loai.php" server="C:/wamp64/www/" local="131574701370000000" remote="131574701370000000" Dst="0" />
+<file name="edit_xe.php" server="C:/wamp64/www/" local="131574517610000000" remote="131574517610000000" Dst="0" />
+<file name="index.php" server="C:/wamp64/www/" local="131574644530000000" remote="131574644530000000" Dst="0" />
+<file name="login.php" server="C:/wamp64/www/" local="131573724150000000" remote="131573724150000000" Dst="0" />
+<file name="logout.php" server="C:/wamp64/www/" local="131573669290000000" remote="131573669290000000" Dst="0" />
+<file name="quantri_banner.php" server="C:/wamp64/www/" local="131338996220000000" remote="131338996220000000" Dst="0" />
+<file name="quantri_hang.php" server="C:/wamp64/www/" local="131573831520000000" remote="131573831520000000" Dst="0" />
+<file name="quantri_loai.php" server="C:/wamp64/www/" local="131573825740000000" remote="131573825740000000" Dst="0" />
+<file name="quantri_xe.php" server="C:/wamp64/www/" local="131573839330000000" remote="131573839330000000" Dst="0" />
+<file name="style.css" server="C:/wamp64/www/" local="131573839030000000" remote="131573839030000000" Dst="0" />
+<file name="vstcount.php" server="C:/wamp64/www/" local="131573752590000000" remote="131573752590000000" Dst="0" />
 </dwsync>

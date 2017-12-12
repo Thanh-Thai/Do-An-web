@@ -173,7 +173,7 @@ $row = mysqli_fetch_assoc($kq);
 	</div><!--/.row-->
 	<div class="row">
 		<form action="" method="post">
-
+<!--            <div><?php print_r($kq) ?></div>-->
 			<table>
 
 				<tr>

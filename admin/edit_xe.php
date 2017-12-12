@@ -37,7 +37,8 @@ if(isset($_POST["btn_Sua"]))
 
 
 	$loai_id=$_POST["theloai_id"];
-
+    $new=$_POST["new"];
+    $sale=$_POST["sale"];
 	$status=$_POST["status"];
 
 	$nsx_id=$_POST["nsx_id"];
@@ -53,6 +54,8 @@ if(isset($_POST["btn_Sua"]))
 	`cateID`='$loai_id',
 	`pStatus`='$status',
 	`mafacID`='$nsx_id',
+    `pNew`='$new',
+    `pSale`='$sale',
 	`pSpecs`='Media/images/spec_$spec_imgname'
 
 	WHERE `tblproducts`.`pID`=$id";
@@ -67,19 +70,6 @@ if(isset($_POST["btn_Sua"]))
 		echo mysqli_error($conn);
 	}
 }
-?>
-<?php
-session_start();
-
-if(!isset($_SESSION["hoten"]))
-{
-	header("location:login.php");
-	die();
-}
-include "../dbcon.php";
-
-$thongbao=null;
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -195,16 +185,16 @@ $thongbao=null;
 				<em class="fa fa-navicon">&nbsp;</em> Table <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
 			</a>
 			<ul class="children collapse" id="sub-item-1">
-				<li><a class="" href="#">
+				<li><a class="" href="quantri_loai.php">
 					<span class="fa fa-arrow-right">&nbsp;</span> Loại Xe
 				</a></li>
-				<li><a class="" href="#">
+				<li><a class="" href="quantri_hang.php">
 					<span class="fa fa-arrow-right">&nbsp;</span> Hãng Sản Xuất
 				</a></li>
-				<li><a class="" href="#">
+				<li><a class="" href="quantri_xe.php">
 					<span class="fa fa-arrow-right">&nbsp;</span> Sản Phẩm
 				</a></li>
-				<li><a class="" href="#">
+				<li><a class="" href="quantri_tin.php">
 					<span class="fa fa-arrow-right">&nbsp;</span> Tin Tức
 				</a></li>
 			</ul>
@@ -222,125 +212,164 @@ $thongbao=null;
 			<li class="active">Quản Trị Xe</li>
 		</ol>
 	</div><!--/.row-->
-	<div class="row">
+	<div class="row" style="margin-left: 2px;">
 		<form action="" method="post" enctype="multipart/form-data">
+			<table style="border-spacing: 5px;">
+				<tr>
+					<td>ID Loại của xe <?php echo $id ?> là: &nbsp;<?php echo $row_edit["cateID"] ?></td>
+					<td style="margin-left: 2px">
+						<select  class="form-control" name="theloai_id">
+							<?php 
+							$sql1="SELECT * FROM tblcategories";
+							$kq=mysqli_query($conn,$sql1);
+							while($row=mysqli_fetch_assoc($kq)){
+								?>
+								<option 
+								<?php
+								if($row_edit["cateID"]==$row["cID"]) 
+									echo "selected";
+								?>
+								value="<?php echo $row["cID"];?>"><?php echo $row["cName"];?>
+							</option>
+							<?php } ?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Tên Xe:</td>
+					<td><input type="text" class="form-control" value="<?php echo $row_edit["pName"];?>" name="name"/></td>
+				</tr>
+				<tr>
+					<td>Nội dung</td>
+					<td><textarea  name="noidung" class="form-control" style="width: 500px;height: 400px"><?php echo $row_edit["pDescript"];?></textarea></td>
+				</tr>	
 
-				<table>
+				<tr>
+					<td>Năm Sản Xuất:</td>
+					<td><input type="text" class="form-control" name="year" value="<?php echo $row_edit["pYear"];?>" /></td>
+				</tr>
+				<tr>
+					<td>Màu:</td>
+					<td><input type="text" class="form-control" name="color" value="<?php echo $row_edit["pColor"];?>" /></td>
+				</tr>	
+				<tr>
+					<td>Giá:</td>
+					<td><input type="text" class="form-control" name="price" value="<?php echo $row_edit["pPrice"];?>" /></td>
+				</tr>	
+				<tr>
+					<td>Hình</td>
+					<td><img width="300px" height="200px" src="../<?php echo $row_edit["pImg"];?>"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="file" class="form-control" name="hinh" value="<?php echo $row_edit["pImg"];?>"></td>
+				</tr>
+				<tr>
+					<td>Tình trạng:</td>
+					<td>
+						<select  class="form-control" name="status">
+							<?php 
+							$sql2="SELECT * FROM tblstatus";
+							$kq=mysqli_query($conn,$sql2);
+							while($row=mysqli_fetch_assoc($kq)){ ?>
+							<option
+							<?php
 
-					<tr>
+								if($row_edit["pStatus"]==$row["sID"]) 
+									echo "selected";
+								?>
+								value="<?php echo $row["sID"];?>"><?php echo $row["sName"];?>
+					
+							</option>
+							<?php
+
+							 } 
+							 ?>
+						</select>
+					</td>
+				</tr>
+                <tr>
+						<td>Sản phẩm mới:</td>
 						<td>
-							ID Loại của xe <?php echo $id ?> là :<?php echo $row_edit["cateID"] ?>
-
-						</td>
-						<td>
-							<select name="theloai_id">
+							<select name="new">
 								<?php 
-								$sql1="SELECT * FROM tblcategories";
-								$kq=mysqli_query($conn,$sql1);
-								while($row=mysqli_fetch_assoc($kq)){
-									?>
-									<option 
-									<?php
-									if($row_edit["cateID"]==$row["cID"]) 
-										echo "selected";
-									?>
-									value="<?php echo $row["cID"];?>"><?php echo $row["cName"];?>
-								</option>
-								<?php } ?>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>Tên Xe:</td>
-						<td><input type="text" value="<?php echo $row_edit["pName"];?>" name="name"/></td>
-					</tr>
-					<tr>
-						<td>Nội dung</td>
-						<td><textarea  name="noidung" style="width: 500px;height: 400px"><?php echo $row_edit["pDescript"];?></textarea></td>
-					</tr>	
-
-					<tr>
-						<td>Năm Sản Xuất:</td>
-						<td><input type="text" name="year" value="<?php echo $row_edit["pYear"];?>" /></td>
-					</tr>
-					<tr>
-						<td>Màu:</td>
-						<td><input type="text" name="color" value="<?php echo $row_edit["pColor"];?>" /></td>
-					</tr>	
-					<tr>
-						<td>Giá:</td>
-						<td><input type="text" name="price" value="<?php echo $row_edit["pPrice"];?>" /></td>
-					</tr>	
-					<tr>
-						<td>Hình</td>
-						<td><img width="300px" height="200px" src="../<?php echo $row_edit["pImg"];?>"></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><input type="file" name="hinh" value="<?php echo $row_edit["pImg"];?>"></td>
-					</tr>
-					<tr>
-						<td>Tình trạng:</td>
-						<td>
-							<select name="status">
-								<?php 
-								$sql2="SELECT * FROM tblstatus";
+								$sql2="SELECT * FROM tblnew";
 								$kq=mysqli_query($conn,$sql2);
 								while($row=mysqli_fetch_assoc($kq)){ ?>
 								<option
-								<?php
+                                        <?php
 
-									if($row_edit["pStatus"]==$row["sID"]) 
-										echo "selected";
-									?>
-									value="<?php echo $row["sID"];?>"><?php echo $row["sName"];?>
-						
+								if($row_edit["pNew"]==$row["ID"]) 
+									echo "selected";
+								?>
+									value="<?php echo $row["ID"];?>"><?php echo $row["name"];?>
 								</option>
 								<?php
-
 								 } 
 								 ?>
 							</select>
 						</td>
-					</tr>		
-					<tr>
+					</tr>	
+                    <tr>
+						<td>Giảm giá:</td>
 						<td>
-							Nhà Sản Xuất:
-						</td>
-						<td>
-							<select name="nsx_id">
+							<select name="sale">
 								<?php 
-								$sql3="SELECT * FROM tblmf";
-								$kq=mysqli_query($conn,$sql3);
+								$sql2="SELECT * FROM tblsale";
+								$kq=mysqli_query($conn,$sql2);
 								while($row=mysqli_fetch_assoc($kq)){ ?>
-								<option 
+								<option
+                                         <?php
+
+								if($row_edit["pSale"]==$row["ID"]) 
+									echo "selected";
+								?>
+									value="<?php echo $row["ID"];?>"><?php echo $row["name"];?>
+								</option>
 								<?php
-									if($row_edit["mafacID"]==$row["mfID"]) 
-										echo "selected";
-									?>
-									value="<?php echo $row["mfID"];?>"><?php echo $row["mfName"];?>
-										
-									</option>
-								<?php } ?>
+								 } 
+								 ?>
 							</select>
 						</td>
 					</tr>
+				<tr>
+					<td>
+						Nhà Sản Xuất:
+					</td>
+					<td>
+						<select class="form-control" name="nsx_id">
+							<?php 
+							$sql3="SELECT * FROM tblmf";
+							$kq=mysqli_query($conn,$sql3);
+							while($row=mysqli_fetch_assoc($kq)){ ?>
+							<option 
+							<?php
+								if($row_edit["mafacID"]==$row["mfID"]) 
+									echo "selected";
+								?>
+								value="<?php echo $row["mfID"];?>"><?php echo $row["mfName"];?>
+									
+								</option>
+							<?php } ?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Thông số (Img):</td>
+					<td><img width="300px" height="200px" src="../<?php echo $row_edit["pSpecs"];?>"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input class="form-control" type="file" name="spec_img" value="<?php echo $row_edit["pSpecs"];?>"></td>
+					</tr>	
 					<tr>
-						<td>Thông số (Img):</td>
-						<td><img width="300px" height="200px" src="../<?php echo $row_edit["pSpecs"];?>"></td>
+						<td colspan="2">
+							<input type="submit" class="btn btn-primary" name="btn_Sua" value="Sửa">
+						</td>			
 					</tr>
-					<tr>
-						<td></td>
-						<td>
-							<input type="file" name="spec_img" value="<?php echo $row_edit["pSpecs"];?>"></td>
-						</tr>	
-						<tr>
-							<td colspan="2">
-								<input type="submit" name="btn_Sua" value="Sửa">
-							</td>			
-						</tr>
 
-					</table>
+				</table>
 
 				</form>
 	</div>

@@ -2,6 +2,12 @@ table {
   border-collapse:separate; 
   border-spacing: 0 1em;
 }
+table#tbqtxe th{
+	text-align: center;	
+}
+table#tbqtxe td{
+	text-align: center;
+}
 /*#alertsc{
 	display:none;
 }*/

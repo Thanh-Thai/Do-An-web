@@ -176,7 +176,7 @@
 							<div class="large"><?php $sql = "SELECT COUNT(pID) FROM tblproducts";
 		$kq = mysqli_query($conn,$sql); 
 		$row = mysqli_fetch_array($kq) ;
-		echo $row[0];
+		echo $row[0]+1;
 		?> </div>
 							<div class="text-muted">Sản Phẩm</div>
 						</div>
@@ -186,13 +186,13 @@
 					<div class="panel panel-orange panel-widget border-right">
 						<div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
 							<div class="large">
-								<?php $sql = "SELECT COUNT(userName) FROM tblusers";
+								<?php $sql = "SELECT COUNT(mfID) FROM tblmf";
 								$kq = mysqli_query($conn,$sql); 
 								$row = mysqli_fetch_array($kq) ;
 								echo $row[0];
 								?>
 							</div>
-							<div class="text-muted">Users</div>
+							<div class="text-muted">Hãng Xe</div>
 						</div>
 					</div>
 				</div>
