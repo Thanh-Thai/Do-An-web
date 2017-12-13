@@ -137,7 +137,8 @@ $row = mysqli_fetch_assoc( $kq );
         </div>
 
         <div class="w3-container w3-text-grey">
-            <p>Thông Tin</p>
+            <p>Giới thiệu</p>
+            <div class="w3-container"><?php echo $row["pDescript"]?></div>
         </div>
         <!-- Product grid -->
         <div class="w3-row w3-grayscale w3-margin-bottom">

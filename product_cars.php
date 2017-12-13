@@ -135,7 +135,7 @@ include "dbcon.php";
 
     <div class="w3-container w3-text-grey" id="jeans"> <p> Sản Phẩm </p> </div>
         <!-- Product grid -->
-        <div class="w3-row w3-grayscale">
+        <div class="w3-row w3-grayscale w3-margin-bottom">
 
             <?php 
 			$sql = "SELECT
@@ -159,13 +159,15 @@ include "dbcon.php";
             <div class="w3-col l3 s6">
                 <div class="w3-container">
                     <img src="<?php echo  $row["img_main"]?>" style="width:100%; height: 140px">
-                    <p class="w3-center"><?php echo $row["mfName"];?> <?php echo $row["pName"]; ?><br><b><?php echo number_format($row["pPrice"]);$row["pPrice"]; ?> VNĐ</b>
+                    <p class="w3-center" style="width: 105%"><?php echo $row["mfName"];?> <?php echo $row["pName"]; ?><br><b><?php echo number_format($row["pPrice"]);$row["pPrice"]; ?> VNĐ</b>
                     </p>
+                    <button class="w3-button w3-round w3-black w3"><a style="text-decoration: none" href="detail.php?id=<?php echo  $row["pID"]; ?>">Xem chi tiết</a></button>
                 </div>
+
             </div>
              <?php
                 }
-                ?>
+            ?>
         </div>
          <div class="w3-row w3-grayscale">
             

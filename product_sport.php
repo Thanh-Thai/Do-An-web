@@ -51,9 +51,9 @@ include "dbcon.php";
             <i class="fa fa-caret-down"></i>
             </a>
                 <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium w3-animate-right">
-                    <a href="product_cars.php" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Xe Hơi</a>     
+                    <a href="product_cars.php" class="w3-bar-item w3-button w3-light-grey">Xe Hơi</a>     
                   <a href="product_SUV.php" class="w3-bar-item w3-button">Xe SUV</a>
-                    <a href="product_sport.php" class="w3-bar-item w3-button">Xe Thể Thao</a>
+                    <a href="product_sport.php" class="w3-bar-item w3-button"><i class="fa fa-caret-right w3-margin-right"></i>Xe Thể Thao</a>
                 </div>
             <a href="#" class="w3-bar-item w3-button">Tin Tức</a>
             <a href="#" class="w3-bar-item w3-button">Dịch Vụ</a>
@@ -151,7 +151,7 @@ include "dbcon.php";
             <div class="w3-col l3 s6">
                 <div class="w3-container">
                     <img src="<?php echo  $row["img_main"]?>" style="width:100%; height: 140px">
-                    <p class="w3-center"><?php echo $row["mfName"];?> <?php echo $row["pName"]; ?><br><b><?php echo number_format($row["pPrice"]);$row["pPrice"]; ?> VNĐ</b>
+                    <p class="w3-center" style="width: 110%"><?php echo $row["mfName"];?> <?php echo $row["pName"]; ?><br><b><?php echo number_format($row["pPrice"]);$row["pPrice"]; ?> VNĐ</b>
                     </p>
                 </div>
             </div>
