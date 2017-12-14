@@ -40,15 +40,15 @@ include "dbcon.php";
 
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
-        <div class="w3-container w3-display-container w3-padding-16">
+         <div class="w3-container w3-display-container w3-padding-16">
             <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
             <h3 class="w3-wide" style="letter-spacing: 1px "><b>WAYMO AUTO</b>
-            <div class="w3-round  w3-image" style="margin-left: -15px"><img src="Media/img/Logo.png" width="100%" /></div>
-            </h3>
+                   <div class="w3-round" style="margin-left: -15px"><img src="Media/img/Logo.png" width="100%" /></div>
+               </h3>
         </div>
         <div class="w3-large w3-text-grey" style="font-weight:bold">
             <a href="index.php" class="w3-bar-item w3-button">Trang Chủ</a>
-            <a href="#" class="w3-bar-item w3-button">Giới Thiệu</a>
+            <a href="about.php" class="w3-bar-item w3-button">Giới Thiệu</a>
             <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">Sản Phẩm
             <i class="fa fa-caret-down"></i>
             </a>
@@ -57,7 +57,7 @@ include "dbcon.php";
                       <a href="product_SUV.php" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Xe SUV</a>
                     <a href="product_sport.php" class="w3-bar-item w3-button">Xe Thể Thao</a>
                 </div>
-            <a href="#" class="w3-bar-item w3-button">Tin Tức</a>
+            <a href="news.php" class="w3-bar-item w3-button">Tin Tức</a>
             <a href="#" class="w3-bar-item w3-button">Dịch Vụ</a>
 
         </div>
@@ -67,9 +67,8 @@ include "dbcon.php";
     </nav>
 
     <!-- Top menu on small screens -->
-    <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
+   <header class="w3-bar w3-hide-large w3-black w3-large">
         <div class="w3-bar-item w3-padding-24 w3-wide">WAYMO AUTO</div>
-        <div><img src="Media/img/Logo.png" width="100%"/></div>
         <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
     </header>
 
@@ -84,15 +83,24 @@ include "dbcon.php";
 
         <!-- Top header -->
         <header class="w3-container w3-xlarge">
-           <a href="index.php"><p class="w3-left">Danh Mục Xe SUV</p></a>
-            <p class="w3-right">
-                <i class="fa fa-shopping-cart w3-margin-right"></i>
-                <i class="fa fa-search"></i>
-            </p>
-        </header>
+           <a href="product_SUV.php"><p class="w3-left">Danh Mục Xe SUV</p></a>
+            <p class="w3-right w3-light-grey">
+             <div class="w3-container w3-right w3-right">
+			<a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding w3-left link-thanhtoan" onclick="document.getElementById('shopcart').style.display='block'">
+                <i class="fa fa-shopping-cart w3-margin-right w3-left">
+                </i>
+               
+                <span class="giohang_count w3-medium w3-left w3-margin-right"> 0 </span><b class="w3-small w3-left"> Sản phẩm.</b> <br />
+               
+                <b class="w3-medium">Tổng số tiền : </b><span class="giohang_money">0</span> VNĐ
+            </a>
+             </div>
 
+        </p>
+        </header>
+                 <div class="w3-container w3-white w3-bar w3-black w3-margin-bottom" style="height: 2px"></div>
         <!-- Image header -->
-       <div class="w3-content w3-display-container">
+       <div class="w3-content w3-display-container w3-margin-bottom">
             <?php 
 			$sql = "SELECT tblproducts.pID,tblproducts.pImg,tblproducts.pNew, tblproducts.cateID, img_main
     	    FROM tblproducts 
@@ -102,7 +110,7 @@ include "dbcon.php";
 			while($row = mysqli_fetch_assoc($kq))
 			{
 				?>
-            <img class="mySlides w3-animate-fading w3-round w3-image" src="<?php echo $row["img_main"] ?>" alt="Xe" style="width:100%; height: 500px">
+            <img class="mySlides w3-animate-fading w3-round w3-image w3-grayscale-min" src="<?php echo $row["img_main"] ?>" alt="Xe" style="width:100%; height: 50%">
             <?php 
             }
             ?>
@@ -117,7 +125,6 @@ include "dbcon.php";
 				?>
             <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
                 <h1 class="w3-jumbo w3-hide-small new-header"><?php echo $row["cName"] ?></h1>
-                <h1 class="w3-hide-large w3-hide-medium new-header"><?php echo $row["cName"] ?></h1>
                 <h1 class="w3-hide-small new-header"><?php echo $row["cDescript"] ?></h1>
 <!--                <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a>-->
                 <?php   }  ?>
@@ -125,9 +132,9 @@ include "dbcon.php";
             </div>
         </div>
 
-    <div class="w3-container w3-text-grey"> <p> Sản Phẩm </p> </div>
+    <div class="w3-container w3-white w3-bar w3-black w3-margin-bottom w3-mobile"> <p> Sản Phẩm </p> </div>
         <!-- Product grid -->
-        <div class="w3-row w3-grayscale">
+        <div class="w3-row w3-grayscale w3-margin-bottom">
             <?php 
 			$sql = "SELECT
             tblproducts.pID,
@@ -150,8 +157,17 @@ include "dbcon.php";
             <div class="w3-col l3 s6">
                 <div class="w3-container">
                     <img src="<?php echo  $row["img_main"]?>" style="width:100%; height: 140px">
+                    <b class="pro_id" hidden="true"><?php echo $row["pID"] ?></b>
+                    <b class="pro_title" hidden="true"><?php echo $row["mfName"];?> <?php echo $row["pName"]; ?></b>
+                    <b class="pro_money" hidden="true"> <?php echo $row["pPrice"] ?></b>
                     <p class="w3-center"><?php echo $row["mfName"];?> <?php echo $row["pName"]; ?><br><b><?php echo number_format($row["pPrice"]);$row["pPrice"]; ?> VNĐ</b>
                     </p>
+                    <button class="w3-button w3-round w3-black w3-margin-bottom">
+               <a style="text-decoration: none" href="detail.php?id=<?php echo $row["pID"]; ?>">Xem chi tiết</a>
+           </button>
+           <button class="w3-button w3-round w3-light-grey w3 pro_cart">
+            <a style="text-decoration: none" href="#">Đặt Mua</a>
+        </button>
                 </div>
             </div>
              <?php
@@ -228,6 +244,13 @@ include "dbcon.php";
                     <i class="fa fa-linkedin w3-hover-opacity w3-large"></i>
                 </div>
             </div>
+             <button onclick="topFunction()" id="myBtntop" title="Go to top">Top</button>
+            <a href="javascript:void(0)" class="link-thanhtoan" onclick="document.getElementById('shopcart').style.display='block'">
+    <div id="myBtncart">
+        <i class="fa fa-shopping-cart w3-margin-right w3-left"></i>
+        <span class="giohang_count w3-left w3-margin-right"> 0 </span>
+    </div>
+    </a>
         </footer>
         <!-- End page content -->
     </div>
@@ -246,7 +269,32 @@ include "dbcon.php";
         </div>
     </div>
 
+<!--    Shop Modal-->
+<div id="shopcart" class="w3-modal">
+    <div class="w3-modal-content w3-animate-top" style="padding:32px">
+        <div class="w3-container w3-white w3-center">
+            <i onclick="document.getElementById('shopcart').style.display='none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
+            <h2>Your Shopping Cart</h2>
+            <div class="w3-container w3-margin-bottom">
+                <div class="shopping-cart w3-margin-bottom">
+                   <div class="modal-body">
+                    <div class="ds_giohang">
+                        Không có sản phẩm nào
+                    </div>
+                </div>
+               
+            </div>
+             <button class="w3-left w3-button w3-round-xlarge w3-green btn-xoadon">Làm Rỗng giỏ hàng</button>
+        </div>
+
+        <button type="button" style="box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);" class="w3-button w3-padding-large w3-cyan w3-margin-bottom btn-thanhtoan " onclick="document.getElementById('shopcart').style.display='none'">Thanh Toán</button>
+    </div>
+</div>
+</div>
+<!--        End Shop Modal-->
     
- <script src="js/javascript.js"></script>
+<script src="js/javascript.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/function.js"></script>
 </body>
 </html>
