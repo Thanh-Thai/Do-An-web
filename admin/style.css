@@ -1,25 +1,16 @@
-div
-{
-	padding: 10px;
+table {
+  border-collapse:separate; 
+  border-spacing: 0 1em;
 }
-.container
-{
-	width: 1000px;
-	margin: auto;
-	border: 1px solid blue;
+table#tbqtxe th{
+	text-align: center;	
 }
-.header
-{
-	border: 1px solid blue;
-	height: 100px;
+table#tbqtxe td{
+	text-align: center;
 }
-.menu
-{
-	border: 1px solid blue;
-	height: 30px;
-}
-.content
-{
-	border: 1px solid blue;
-	min-height: 300px;
+/*#alertsc{
+	display:none;
+}*/
+.hidden{
+	display: none;
 }
