@@ -1,4 +1,4 @@
-var danhsach_datmua = [];
+﻿var danhsach_datmua = [];
 GetCookie();
 CapNhatGioHang();
 
@@ -63,7 +63,7 @@ function CapNhatGioHang()
 	  currency: 'USD',
 	  minimumFractionDigits: 0,
 	  // the default value for minimumFractionDigits depends on the currency
-	  // and is usually already 2
+
 	});
 	var sosanpham = 0;
 	var sotien = 0;
@@ -82,10 +82,9 @@ function HienThiDanhSach()
 	  style: 'currency',
 	  currency: 'USD',
 	  minimumFractionDigits: 0,
-	  // the default value for minimumFractionDigits depends on the currency
-	  // and is usually already 2
+	
 	});
-	var innerHtml = '<table class="ds_donhang" width="100%" border="1"> <tr> <td>Mã Sản Phẩm</td> <td>Tên Sản Phẩm</td> <td>Giá Tiền</td> <td>Số lượng</td> </tr>';
+	var innerHtml = '<table class="ds_donhang w3-table w3-striped" width="100%" border="0"> <tr> <td>Mã Sản Phẩm</td> <td>Tên Sản Phẩm</td> <td>Giá Tiền</td> <td>Số lượng</td> </tr>';
 	
 	for(i=0;i<danhsach_datmua.length;i++){
 		var sanpham = danhsach_datmua[i];
