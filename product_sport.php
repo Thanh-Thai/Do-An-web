@@ -41,12 +41,12 @@ include "dbcon.php";
         <div class="w3-container w3-display-container w3-padding-16">
             <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
             <h3 class="w3-wide" style="letter-spacing: 1px "><b>WAYMO AUTO</b>
-                   <div class="w3-round" style="margin-left: -15px"><img src="Media/img/Logo.png" width="100%" /></div>
-               </h3>
+            <div class="w3-round"><img src="Media/img/Logo.png" width="100%" /></div>
+            </h3>
         </div>
         <div class="w3-large w3-text-grey" style="font-weight:bold">
             <a href="index.php" class="w3-bar-item w3-button">Trang Chủ</a>
-            <a href="about.php" class="w3-bar-item w3-button">Giới Thiệu</a>
+            <a href="#" class="w3-bar-item w3-button">Giới Thiệu</a>
             <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">Sản Phẩm
             <i class="fa fa-caret-down"></i>
             </a>
@@ -55,7 +55,7 @@ include "dbcon.php";
                   <a href="product_SUV.php" class="w3-bar-item w3-button">Xe SUV</a>
                     <a href="product_sport.php" class="w3-bar-item w3-button"><i class="fa fa-caret-right w3-margin-right"></i>Xe Thể Thao</a>
                 </div>
-            <a href="news.php" class="w3-bar-item w3-button">Tin Tức</a>
+            <a href="#" class="w3-bar-item w3-button">Tin Tức</a>
             <a href="#" class="w3-bar-item w3-button">Dịch Vụ</a>
 
         </div>
@@ -65,8 +65,10 @@ include "dbcon.php";
     </nav>
 
     <!-- Top menu on small screens -->
-    <header class="w3-bar w3-hide-large w3-black w3-large">
+    <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
         <div class="w3-bar-item w3-padding-24 w3-wide">WAYMO AUTO</div>
+        <div><img src="Media/img/Logo.png" width="100%"/>
+        </div>
         <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
     </header>
 
@@ -81,7 +83,7 @@ include "dbcon.php";
 
         <!-- Top header -->
         <header class="w3-container w3-xlarge">
-           <a href="product_sport.php"><p class="w3-left">Danh Mục Xe Thể Thao</p></a>
+           <a href="index.php"><p class="w3-left">Danh Mục Xe Thể Thao</p></a>
             <p class="w3-right">
                 <i class="fa fa-shopping-cart w3-margin-right"></i>
                 <i class="fa fa-search"></i>
@@ -89,7 +91,7 @@ include "dbcon.php";
         </header>
 
         <!-- Image header -->
-       <div class="w3-content w3-display-container w3-margin-bottom">
+       <div class="w3-content w3-display-container">
             <?php 
 			$sql = "SELECT tblproducts.pID,tblproducts.pImg, tblproducts.cateID, img_main
     	    FROM tblproducts 
@@ -99,7 +101,7 @@ include "dbcon.php";
 			while($row = mysqli_fetch_assoc($kq))
 			{
 				?>
-            <img class="mySlides w3-animate-fading w3-round w3-image w3-grayscale-min" src="<?php echo $row["img_main"] ?>" alt="Xe" style="width:100%; height: 50%">
+            <img class="mySlides w3-animate-fading w3-round w3-image" src="<?php echo $row["img_main"] ?>" alt="Xe" style="width:100%; height: 500px">
             <?php 
             }
             ?>
@@ -123,9 +125,9 @@ include "dbcon.php";
             </div>
         </div>
 
-    <div class="w3-container w3-white w3-bar w3-black w3-margin-bottom w3-mobile"> <p> Các dòng xe </p> </div>
+    <div class="w3-container w3-text-grey" id="jeans"> <p> Sản Phẩm </p> </div>
         <!-- Product grid -->
-        <div class="w3-row w3-grayscale w3-margin-bottom">
+        <div class="w3-row w3-grayscale">
 
             <?php 
 			$sql = "SELECT
@@ -151,12 +153,6 @@ include "dbcon.php";
                     <img src="<?php echo  $row["img_main"]?>" style="width:100%; height: 140px">
                     <p class="w3-center" style="width: 110%"><?php echo $row["mfName"];?> <?php echo $row["pName"]; ?><br><b><?php echo number_format($row["pPrice"]);$row["pPrice"]; ?> VNĐ</b>
                     </p>
-                    <button class="w3-button w3-round w3-black w3-margin-bottom">
-               <a style="text-decoration: none" href="detail.php?id=<?php echo $row["pID"]; ?>">Xem chi tiết</a>
-           </button>
-           <button class="w3-button w3-round w3-light-grey w3 pro_cart">
-            <a style="text-decoration: none" href="#">Đặt Mua</a>
-        </button>
                 </div>
             </div>
              <?php
@@ -233,13 +229,6 @@ include "dbcon.php";
                     <i class="fa fa-linkedin w3-hover-opacity w3-large"></i>
                 </div>
             </div>
-             <button onclick="topFunction()" id="myBtntop" title="Go to top">Top</button>
-            <a href="javascript:void(0)" class="link-thanhtoan" onclick="document.getElementById('shopcart').style.display='block'">
-    <div id="myBtncart">
-        <i class="fa fa-shopping-cart w3-margin-right w3-left"></i>
-        <span class="giohang_count w3-left w3-margin-right"> 0 </span>
-    </div>
-    </a>
         </footer>
         <!-- End page content -->
     </div>

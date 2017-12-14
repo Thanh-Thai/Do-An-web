@@ -60,24 +60,26 @@ $row = mysqli_fetch_assoc( $kq );
 
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
-         <div class="w3-container w3-display-container w3-padding-16">
+        <div class="w3-container w3-display-container w3-padding-16">
             <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
             <h3 class="w3-wide" style="letter-spacing: 1px "><b>WAYMO AUTO</b>
-                   <div class="w3-round" style="margin-left: -15px"><img src="Media/img/Logo.png" width="100%" /></div>
-               </h3>
+            <div class="w3-round" style="margin-left: -15px"><img src="Media/img/Logo.png" width="100%" /></div>
+            </h3>
         </div>
         <div class="w3-large w3-text-grey" style="font-weight:bold">
             <a href="index.php" class="w3-bar-item w3-button">Trang Chủ</a>
             <a href="about.php" class="w3-bar-item w3-button">Giới Thiệu</a>
-            <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-left-align" id="myBtn">Sản Phẩm
+            <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">Sản Phẩm
             <i class="fa fa-caret-down"></i>
             </a>
             <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium w3-animate-right">
                 <a href="product_cars.php" class="w3-bar-item w3-button">Xe Hơi</a>
+                <!--<i class="fa fa-caret-right w3-margin-right"></i>-->
+
                 <a href="product_SUV.php" class="w3-bar-item w3-button">Xe SUV</a>
                 <a href="product_sport.php" class="w3-bar-item w3-button">Xe Thể Thao</a>
             </div>
-            <a href="news.php" class="w3-bar-item w3-button">Tin Tức</a>
+            <a href="#" class="w3-bar-item w3-button">Tin Tức</a>
             <a href="#" class="w3-bar-item w3-button">Dịch Vụ</a>
 
         </div>
@@ -87,8 +89,10 @@ $row = mysqli_fetch_assoc( $kq );
     </nav>
 
     <!-- Top menu on small screens -->
-    <header class="w3-bar w3-hide-large w3-black w3-large">
+    <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
         <div class="w3-bar-item w3-padding-24 w3-wide">WAYMO AUTO</div>
+        <div><img src="Media/img/Logo.png" width="100%"/>
+        </div>
         <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
     </header>
 
@@ -103,27 +107,18 @@ $row = mysqli_fetch_assoc( $kq );
 
         <!-- Top header -->
         <header class="w3-container w3-xlarge">
-            <a href="#">
-                <p class="w3-left">Chi Tiết Sản Phẩm</p>
+            <a href="index.php">
+                <p class="w3-left">Trang Chủ</p>
             </a>
-           <p class="w3-right w3-light-grey">
-             <div class="w3-container w3-right w3-right">
-			<a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding w3-left link-thanhtoan" onclick="document.getElementById('shopcart').style.display='block'">
-                <i class="fa fa-shopping-cart w3-margin-right w3-left">
-                </i>
-               
-                <span class="giohang_count w3-medium w3-left w3-margin-right"> 0 </span><b class="w3-small w3-left"> Sản phẩm.</b> <br />
-               
-                <b class="w3-medium">Tổng số tiền : </b><span class="giohang_money">0</span> VNĐ
-            </a>
-             </div>
-
-        </p>
+            <p class="w3-right">
+                <i class="fa fa-shopping-cart w3-margin-right"></i>
+                <i class="fa fa-search"></i>
+            </p>
         </header>
-         <div class="w3-container w3-white w3-bar w3-black w3-margin-bottom" style="height: 2px"></div>
+
         <!-- Image header -->
-        <div class="w3-content w3-display-container w3-mobile">
-            <img class="w3-round w3-image w3-grayscale-min" src="<?php echo $row["img_main"] ?>" alt="Xe" style="width:100%; height: 50%">
+        <div class="w3-content w3-display-container">
+            <img class="w3-round w3-image" src="<?php echo $row["img_main"] ?>" alt="Xe" style="width:100%; height: 430px">
             <div class="w3-display-topleft w3-text-light-gray" style="padding:24px 48px">
                 <h1 class="w3-jumbo w3-hide-small ">
                     <?php echo $row["mfName"] ?>
@@ -136,27 +131,20 @@ $row = mysqli_fetch_assoc( $kq );
                 <h1 class="w3-hide-small">
                     <?php echo $row["pYear"] ?>
                 </h1>
+                <!--                <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a>-->
                 </p>
             </div>
         </div>
 
         <div class="w3-container w3-text-grey">
             <p>Giới thiệu</p>
-                <b class="pro_id" hidden="true"><?php echo $row["pID"] ?></b>
-            <b class="pro_title" hidden="true"><?php echo $row["pName"] ?></b>
-            <b class="pro_money" hidden="true"> <?php echo $row["pPrice"] ?></b>
             <div class="w3-container"><?php echo $row["pDescript"]?></div>
-            <button class="w3-button w3-round w3-teal w3 pro_cart w3-block w3-center">
-            <a style="text-decoration: none; text-align: center" href="#">Đặt Mua Ngay!</a>
-        </button>
         </div>
-         
         <!-- Product grid -->
-        <div class="w3-row w3-margin-bottom">
+        <div class="w3-row w3-grayscale w3-margin-bottom">
             <div class="w3-container w3-text-dark-grey">
                     <h2>Thông Số Cơ Bản</h2>
                 </div>
-        
             <div class="w3-container w3-margin-bottom">
                 <div class="w3-bar w3-gray">
                     <button class="w3-bar-item w3-button tablink w3-black" onclick="openCity(event,'main')">Thông Số Chính</button>
@@ -236,12 +224,12 @@ $row = mysqli_fetch_assoc( $kq );
                     </div>
                 </div>
             </div>
-            <div class="w3-container">
+            <div class="w3-container w3-text-dark-grey">
                     <h2>Hình Ảnh</h2>
-                 <div class="w3-content w3-display-container" style=" max-width:900px">
-                              <img class="mySlides1 w3-image w3-round w3-animate-opacity" src="<?php echo $row["img_main"] ?>" style="width:100%; height: 500px; display: block">
-                              <img class="mySlides1 w3-image w3-round w3-animate-opacity" src="<?php echo $row["img1"]?>" style="width:100%; height: 500px; display: none">
-                              <img class="mySlides1 w3-image w3-round w3-animate-opacity" src="<?php echo $row["img1"]?>" style="width:100%; height: 500px; display: none">
+                 <div class="w3-content" style=" max-width:900px">
+                              <img class="mySlides1 w3-round w3-animate-opacity" src="<?php echo $row["img_main"] ?>" style="width:100%; height: 500px; display: block">
+                              <img class="mySlides1 w3-round w3-animate-opacity" src="<?php echo $row["img1"]?>" style="width:100%; height: 500px; display: none">
+                              <img class="mySlides1 w3-round w3-animate-opacity" src="<?php echo $row["img1"]?>" style="width:100%; height: 500px; display: none">
                           
                      <div class="w3-row-padding w3-section">
                     <div class="w3-col s4">
@@ -325,13 +313,6 @@ $row = mysqli_fetch_assoc( $kq );
                     <i class="fa fa-linkedin w3-hover-opacity w3-large"></i>
                 </div>
             </div>
-             <button onclick="topFunction()" id="myBtntop" title="Go to top">Top</button>
-            <a href="javascript:void(0)" class="link-thanhtoan" onclick="document.getElementById('shopcart').style.display='block'">
-    <div id="myBtncart">
-        <i class="fa fa-shopping-cart w3-margin-right w3-left"></i>
-        <span class="giohang_count w3-left w3-margin-right"> 0 </span>
-    </div>
-    </a>
         </footer>
         <!-- End page content -->
     </div>
@@ -350,33 +331,8 @@ $row = mysqli_fetch_assoc( $kq );
         </div>
     </div>
 
-<div id="shopcart" class="w3-modal">
-    <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
-        <div class="w3-container w3-white w3-center">
-            <i onclick="document.getElementById('shopcart').style.display='none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
-            <h2>Your Shopping Cart</h2>
-            <div class="w3-container w3-margin-bottom">
-                <div class="shopping-cart w3-margin-bottom">
-                   <div class="modal-body">
-                    <div class="ds_giohang">
-                        Không có sản phẩm nào
-                    </div>
-                </div>
-               
-            </div>
-             <button class="w3-left w3-button w3-round-xlarge w3-green btn-xoadon">Làm Rỗng giỏ hàng</button>
-        </div>
-
-        <button type="button" style="box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);" class="w3-button w3-padding-large w3-cyan w3-margin-bottom btn-thanhtoan " onclick="document.getElementById('shopcart').style.display='none'">Thanh Toán</button>
-    </div>
-</div>
-</div>
-
 
 <script src="js/javascript.js"></script>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/function.js"></script>
-
 </body>
 
 </html>
