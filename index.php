@@ -104,8 +104,8 @@ h6,
     <!-- Image header -->
     <div class="w3-content w3-display-container w3-margin-bottom">
      <?php 
-     $sql = "SELECT tblproducts.pID,tblproducts.pImg,tblproducts.pNew,img_main FROM tblproducts INNER JOIN tblmf ON tblproducts.mafacID = tblmf.mfID
-     INNER JOIN tblimg ON tblproducts.pImg = tblimg.iID WHERE pNew=1"	;
+     $sql = "SELECT tblproducts.pID,tblproducts.pNew,img_main FROM tblproducts INNER JOIN tblmf ON tblproducts.mafacID = tblmf.mfID
+     INNER JOIN tblimg ON tblproducts.pID = tblimg.iID WHERE pNew=1"	;
      $kq = mysqli_query($conn,$sql);
      while($row = mysqli_fetch_assoc($kq))
      {
@@ -138,11 +138,10 @@ h6,
 	tblproducts.pPrice,
 	tblproducts.mafacID,
 	tblmf.mfName,
-	tblproducts.pImg,
 	cateID, pView,img_main 
 	FROM tblproducts
     INNER JOIN tblmf ON tblproducts.mafacID = tblmf.mfID
-    INNER JOIN tblimg ON tblproducts.pImg = tblimg.iID 
+    INNER JOIN tblimg ON tblproducts.pID = tblimg.iID 
     WHERE pView>40
     LIMIT 4"	;
     $kq = mysqli_query($conn,$sql);
@@ -180,11 +179,10 @@ h6,
     tblproducts.pPrice,
     tblproducts.mafacID,
     tblmf.mfName,
-    tblproducts.pImg,
     cateID, pView, pSale,img_main
     FROM tblproducts 
     INNER JOIN tblmf ON tblproducts.mafacID = tblmf.mfID
-    INNER JOIN tblimg ON tblproducts.pImg = tblimg.iID 
+    INNER JOIN tblimg ON tblproducts.pID = tblimg.iID 
     WHERE pSale=1"	;
     $kq = mysqli_query($conn,$sql);
     while($row = mysqli_fetch_assoc($kq))
@@ -221,11 +219,10 @@ h6,
     tblproducts.pPrice,
     tblproducts.mafacID,
     tblmf.mfName,
-    tblproducts.pImg,
     cateID, pView, pSale,img_main
     FROM tblproducts 
     INNER JOIN tblmf ON tblproducts.mafacID = tblmf.mfID
-    INNER JOIN tblimg ON tblproducts.pImg = tblimg.iID"  ;
+    INNER JOIN tblimg ON tblproducts.pID = tblimg.iID"  ;
     $kq = mysqli_query($conn,$sql);
     while($row = mysqli_fetch_assoc($kq))
     {
@@ -318,7 +315,7 @@ h6,
  </div>
 </div>
  <button onclick="topFunction()" id="myBtntop" title="Go to top">Top</button>
-    <a href="javascript:void(0)" class="link-thanhtoan" onclick="document.getElementById('shopcart').style.display='block'">
+<a href="javascript:void(0)" class="link-thanhtoan" onclick="document.getElementById('shopcart').style.display='block'">
     <div id="myBtncart">
         <i class="fa fa-shopping-cart w3-margin-right w3-left"></i>
         <span class="giohang_count w3-left w3-margin-right"> 0 </span>
@@ -349,7 +346,7 @@ h6,
             <div class="w3-container w3-margin-bottom">
                 <div class="shopping-cart w3-margin-bottom">
                    <div class="modal-body">
-                    <div class="ds_giohang">
+                    <div class="ds_giohang w3-margin-bottom">
                         Không có sản phẩm nào
                     </div>
                 </div>
@@ -357,8 +354,6 @@ h6,
             </div>
              <button class="w3-left w3-button w3-round-xlarge w3-green btn-xoadon">Làm Rỗng giỏ hàng</button>
         </div>
-
-        <button type="button" style="box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);" class="w3-button w3-padding-large w3-cyan w3-margin-bottom btn-thanhtoan " onclick="document.getElementById('shopcart').style.display='none'">Thanh Toán</button>
     </div>
 </div>
 </div>

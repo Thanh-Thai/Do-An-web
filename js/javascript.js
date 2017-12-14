@@ -11,7 +11,7 @@ function carousel() {
     }
     slideIndex++;
     if (slideIndex > x.length) {
-        slideIndex = 1
+        slideIndex = 1;
     }
     x[slideIndex - 1].style.display = "block";
     setTimeout(carousel, 9000); // Change image every 2 seconds
@@ -97,3 +97,4 @@ function topFunction() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 } 
+  

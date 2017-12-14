@@ -14,3 +14,8 @@ table#tbqtxe td{
 .hidden{
 	display: none;
 }
+.inputfield
+{
+/*    width: 140%;*/
+    margin-right: 40px;
+}

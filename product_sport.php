@@ -82,19 +82,28 @@ include "dbcon.php";
         <!-- Top header -->
         <header class="w3-container w3-xlarge">
            <a href="product_sport.php"><p class="w3-left">Danh Mục Xe Thể Thao</p></a>
-            <p class="w3-right">
-                <i class="fa fa-shopping-cart w3-margin-right"></i>
-                <i class="fa fa-search"></i>
-            </p>
-        </header>
+            <p class="w3-right w3-light-grey">
+             <div class="w3-container w3-right w3-right">
+			<a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding w3-left link-thanhtoan" onclick="document.getElementById('shopcart').style.display='block'">
+                <i class="fa fa-shopping-cart w3-margin-right w3-left">
+                </i>
+               
+                <span class="giohang_count w3-medium w3-left w3-margin-right"> 0 </span><b class="w3-small w3-left"> Sản phẩm.</b> <br />
+               
+                <b class="w3-medium">Tổng số tiền : </b><span class="giohang_money">0</span> VNĐ
+            </a>
+             </div>
 
+        </p>
+        </header>
+        <div class="w3-container w3-white w3-bar w3-black w3-margin-bottom" style="height: 2px"></div>
         <!-- Image header -->
        <div class="w3-content w3-display-container w3-margin-bottom">
             <?php 
-			$sql = "SELECT tblproducts.pID,tblproducts.pImg, tblproducts.cateID, img_main
+			$sql = "SELECT tblproducts.pID, tblproducts.cateID, img_main
     	    FROM tblproducts 
             INNER JOIN tblmf ON tblproducts.mafacID = tblmf.mfID
-            INNER JOIN tblimg ON tblproducts.pImg = tblimg.iID WHERE cateID=2"	;
+            INNER JOIN tblimg ON tblproducts.pID = tblimg.iID WHERE cateID=2"	;
 			$kq = mysqli_query($conn,$sql);
 			while($row = mysqli_fetch_assoc($kq))
 			{
@@ -136,11 +145,10 @@ include "dbcon.php";
             tblproducts.mafacID,
             tblproducts.cateID,
             tblmf.mfName,
-            tblproducts.pImg,
             cateID, pView,img_main 
             FROM tblproducts
             INNER JOIN tblmf ON tblproducts.mafacID = tblmf.mfID
-            INNER JOIN tblimg ON tblproducts.pImg = tblimg.iID  
+            INNER JOIN tblimg ON tblproducts.pID = tblimg.iID  
             WHERE cateID=2"	;
 			$kq = mysqli_query($conn,$sql);
 			while($row = mysqli_fetch_assoc($kq))
@@ -149,6 +157,9 @@ include "dbcon.php";
             <div class="w3-col l3 s6">
                 <div class="w3-container">
                     <img src="<?php echo  $row["img_main"]?>" style="width:100%; height: 140px">
+                     <b class="pro_id" hidden="true"><?php echo $row["pID"] ?></b>
+                    <b class="pro_title" hidden="true"><?php echo $row["mfName"];?> <?php echo $row["pName"]; ?></b>
+                    <b class="pro_money" hidden="true"> <?php echo $row["pPrice"] ?></b>
                     <p class="w3-center" style="width: 110%"><?php echo $row["mfName"];?> <?php echo $row["pName"]; ?><br><b><?php echo number_format($row["pPrice"]);$row["pPrice"]; ?> VNĐ</b>
                     </p>
                     <button class="w3-button w3-round w3-black w3-margin-bottom">
@@ -257,8 +268,31 @@ include "dbcon.php";
             </div>
         </div>
     </div>
+    
+    <div id="shopcart" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
+        <div class="w3-container w3-white w3-center">
+            <i onclick="document.getElementById('shopcart').style.display='none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
+            <h2>Your Shopping Cart</h2>
+            <div class="w3-container w3-margin-bottom">
+                <div class="shopping-cart w3-margin-bottom">
+                   <div class="modal-body">
+                    <div class="ds_giohang w3-margin-bottom">
+                        Không có sản phẩm nào
+                    </div>
+                </div>
+               
+            </div>
+             <button class="w3-left w3-button w3-round-xlarge w3-green btn-xoadon">Làm Rỗng giỏ hàng</button>
+        </div>
+    </div>
+</div>
+</div>
 
     
- <script src="js/javascript.js"></script>
+
+<script src="js/javascript.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/function.js"></script>
 </body>
 </html>

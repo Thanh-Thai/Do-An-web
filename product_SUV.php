@@ -102,10 +102,10 @@ include "dbcon.php";
         <!-- Image header -->
        <div class="w3-content w3-display-container w3-margin-bottom">
             <?php 
-			$sql = "SELECT tblproducts.pID,tblproducts.pImg,tblproducts.pNew, tblproducts.cateID, img_main
+			$sql = "SELECT tblproducts.pID,tblproducts.pNew, tblproducts.cateID, img_main
     	    FROM tblproducts 
             INNER JOIN tblmf ON tblproducts.mafacID = tblmf.mfID
-            INNER JOIN tblimg ON tblproducts.pImg = tblimg.iID WHERE cateID=1"	;
+            INNER JOIN tblimg ON tblproducts.pID = tblimg.iID WHERE cateID=1"	;
 			$kq = mysqli_query($conn,$sql);
 			while($row = mysqli_fetch_assoc($kq))
 			{
@@ -144,11 +144,10 @@ include "dbcon.php";
             tblproducts.mafacID,
             tblproducts.cateID,
             tblmf.mfName,
-            tblproducts.pImg,
             cateID, pView,img_main 
             FROM tblproducts
             INNER JOIN tblmf ON tblproducts.mafacID = tblmf.mfID
-            INNER JOIN tblimg ON tblproducts.pImg = tblimg.iID 
+            INNER JOIN tblimg ON tblproducts.pID = tblimg.iID 
             WHERE cateID=1"	;
 			$kq = mysqli_query($conn,$sql);
 			while($row = mysqli_fetch_assoc($kq))
@@ -271,14 +270,14 @@ include "dbcon.php";
 
 <!--    Shop Modal-->
 <div id="shopcart" class="w3-modal">
-    <div class="w3-modal-content w3-animate-top" style="padding:32px">
+    <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
         <div class="w3-container w3-white w3-center">
             <i onclick="document.getElementById('shopcart').style.display='none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
             <h2>Your Shopping Cart</h2>
             <div class="w3-container w3-margin-bottom">
                 <div class="shopping-cart w3-margin-bottom">
                    <div class="modal-body">
-                    <div class="ds_giohang">
+                    <div class="ds_giohang w3-margin-bottom">
                         Không có sản phẩm nào
                     </div>
                 </div>
@@ -286,8 +285,6 @@ include "dbcon.php";
             </div>
              <button class="w3-left w3-button w3-round-xlarge w3-green btn-xoadon">Làm Rỗng giỏ hàng</button>
         </div>
-
-        <button type="button" style="box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);" class="w3-button w3-padding-large w3-cyan w3-margin-bottom btn-thanhtoan " onclick="document.getElementById('shopcart').style.display='none'">Thanh Toán</button>
     </div>
 </div>
 </div>

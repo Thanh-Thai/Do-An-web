@@ -358,7 +358,7 @@ $row = mysqli_fetch_assoc( $kq );
             <div class="w3-container w3-margin-bottom">
                 <div class="shopping-cart w3-margin-bottom">
                    <div class="modal-body">
-                    <div class="ds_giohang">
+                    <div class="ds_giohang w3-margin-bottom">
                         Không có sản phẩm nào
                     </div>
                 </div>
@@ -366,11 +366,10 @@ $row = mysqli_fetch_assoc( $kq );
             </div>
              <button class="w3-left w3-button w3-round-xlarge w3-green btn-xoadon">Làm Rỗng giỏ hàng</button>
         </div>
-
-        <button type="button" style="box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);" class="w3-button w3-padding-large w3-cyan w3-margin-bottom btn-thanhtoan " onclick="document.getElementById('shopcart').style.display='none'">Thanh Toán</button>
     </div>
 </div>
 </div>
+
 
 
 <script src="js/javascript.js"></script>
