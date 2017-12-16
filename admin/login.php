@@ -53,8 +53,5 @@ if (isset($_POST["btn_DN"])) {
 		</div><!-- /.col-->
 	</div><!-- /.row -->	
 	
-
-<!-- <script src="js/jquery-1.11.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script> -->
 </body>
 </html>

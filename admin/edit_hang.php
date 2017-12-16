@@ -26,8 +26,8 @@ $row = mysqli_fetch_assoc($kq);
 <!DOCTYPE html>
 <?php include("header.php") ?>
 
-			 <li class="active"><a href="quantri_loai.php">Quản Trị Loại Xe</a></li>
-            <li class="active"><a href="edit_loai.php">Sửa loại xe</a></li>
+			 <li class="active"><a href="quantri_hang.php">Quản Trị hãng Xe</a></li>
+            <li class="active"><a href="edit_hang.php">Sửa hãng xe</a></li>
 		</ol>
 	</div><!--/.row-->
 	<div class="row">

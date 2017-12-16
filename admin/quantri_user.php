@@ -1,17 +1,12 @@
 <?php
-session_start();
+include("checklogin.php");
 
-if(!isset($_SESSION["hoten"]))
-{
-	header("location:login.php");
-	die();
-}
 elseif($_SESSION['role']!=1)
 {
     header("location:index.php");
     exit();
 }
-include "../dbcon.php";
+
 
 $thongbao=null;
 
