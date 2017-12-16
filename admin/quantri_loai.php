@@ -1,12 +1,5 @@
 <?php
-session_start();
-
-if(!isset($_SESSION["hoten"]))
-{
-	header("location:login.php");
-	die();
-}
-include "../dbcon.php";
+include("checklogin.php");
 
 $thongbao=null;
 

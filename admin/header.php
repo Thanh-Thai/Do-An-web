@@ -16,6 +16,7 @@
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
 <![endif]-->
+
 </head>
 <body>
 <div class="header">
@@ -149,12 +150,20 @@
 					<span class="fa fa-arrow-right">&nbsp;</span> Khách Hàng
 				</a>
                     </li>
-                    <li><a class="" href="quantri_Order.php">
+                    <li><a class="" href="quantri_order.php">
 					<span class="fa fa-arrow-right">&nbsp;</span> Đơn Đặt Hàng
 				</a>
                     </li>
+                    <li><a class="" href="quantri_dorder.php">
+                    <span class="fa fa-arrow-right">&nbsp;</span> Chi tiết đơn hàng
+                </a>
+                    </li>
                     <li><a class="" href="quantri_user.php">
 					<span class="fa fa-arrow-right">&nbsp;</span> User
+				</a>
+                    </li>
+                     <li><a class="" href="quantri_tin.php">
+					<span class="fa fa-arrow-right">&nbsp;</span> Tin tức
 				</a>
                     </li>
                 </ul>

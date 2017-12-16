@@ -1,12 +1,6 @@
 <?php
-	session_start();
+include("checklogin.php");
 
-	if(!isset($_SESSION["hoten"]))
-	{
-		header("location:login.php");
-		die();
-	}
-		include "../dbcon.php";
 
 header("location:quantri_loai.php");
 $id = $_GET[id];

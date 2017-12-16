@@ -1,20 +1,11 @@
 <?php
-session_start();
-
-if(!isset($_SESSION["hoten"]))
-{
-	header("location:login.php");
-	die();
-}
-include "../dbcon.php";
-
+include("checklogin.php");
 $thongbao=null;
 
 ?>
 <?php include("header.php"); ?>
 
-			<li class="active"><a href="quantri_loai.php">Quản Trị Loại Xe</a></li>
-			<button type="button" class="btn btn-md btn-default" style="float: right; padding: 0px"><a href="add_loai.php">Thêm</a></button>
+			<li class="active"><a href="quantri_Order.php">Quản Trị Loại Xe</a></li>
 		</ol>
 	</div><!--/.row-->
 	<div class="row">
@@ -37,13 +28,13 @@ $thongbao=null;
 				<tr>
 					<td><?php echo  $row["oID"]; ?></td>
 					<td><?php echo  $row["ctID"] ?></td>
-					<td><?php echo  $row["datecreate"] ?></td>
+					<td><?php echo  $row["dateCreate"] ?></td>
 					<td><?php echo  $row["Total"] ?></td>
 					<td> 
-						<a href="edit_loai.php?suaid=<?php echo $row["oID"]; ?>">
+						<!-- <a href="edit_order.php?suaid=<?php //echo $row["oID"]; ?>">
 							<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa 
-						</a> | 
-						<a onclick="return confirm('Bạn có chắc chắn không?')" href="delete_loai.php?id=<?php echo  $row["oID"]; ?>">								
+						</a> |  -->
+						<a onclick="return confirm('Bạn có chắc chắn không?')" href="delete_order.php?id=<?php echo  $row["oID"]; ?>">								
 							<i class="fa fa-trash" aria-hidden="true"></i> Xóa
 						</a>
 					</td>

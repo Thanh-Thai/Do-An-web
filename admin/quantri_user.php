@@ -17,8 +17,8 @@ $thongbao=null;
 
 ?>
 <?php include("header.php"); ?>
-			<li class="active"><a href="quantri_loai.php">Quản Trị Loại Xe</a></li>
-			<button type="button" class="btn btn-md btn-default" style="float: right; padding: 0px"><a href="add_loai.php">Thêm</a></button>
+			<li class="active"><a href="quantri_user.php">Quản Trị User</a></li>
+			<button type="button" class="btn btn-md btn-default" style="float: right; padding: 0px"><a href="add_user.php">Thêm</a></button>
 		</ol>
 	</div><!--/.row-->
 	<div class="row">
@@ -52,10 +52,10 @@ $thongbao=null;
 					<td><?php echo  $row["uGen"] ?></td>
 					<td><?php echo  $row["Role"] ?></td>
 					<td> 
-						<a href="edit_loai.php?suaid=<?php echo $row["userName"]; ?>">
+						<a href="edit_user.php?suaid=<?php echo $row["userName"]; ?>">
 							<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa 
 						</a> | 
-						<a onclick="return confirm('Bạn có chắc chắn không?')" href="delete_loai.php?id=<?php echo  $row["userName"]; ?>">								
+						<a onclick="return confirm('Bạn có chắc chắn không?')" href="delete_user.php?id=<?php echo  $row["userName"]; ?>">								
 							<i class="fa fa-trash" aria-hidden="true"></i> Xóa
 						</a>
 					</td>

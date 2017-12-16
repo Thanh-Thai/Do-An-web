@@ -1,12 +1,6 @@
 <?php
-session_start();
-if ( !isset( $_SESSION[ "hoten" ] ) ) {
-    header( "location:login.php" );
-    die( 'Access Denied' );
+include("checklogin.php");
 
-}
-
-include "../dbcon.php";
 ?>
 
 <?php include("header.php"); ?>

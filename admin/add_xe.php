@@ -1,11 +1,6 @@
 <?php
-session_start();
+include("checklogin.php");
 
-if ( !isset( $_SESSION[ "hoten" ] ) ) {
-    header( "location:login.php" );
-    die();
-}
-include "../dbcon.php";
 
 $thongbao = NULL;
 //Kiem tra co nhat nut hay khong
@@ -28,22 +23,22 @@ if ( isset( $_POST[ "btn_Them" ] ) ) {
     $temp = $_FILES[ "hinh_main" ][ "tmp_name" ];
     $hinhname = $_FILES[ "hinh_main" ][ "name" ];
     $handle = fopen( $_FILES[ "hinh_main" ][ "tmp_name" ], 'r' );
-    move_uploaded_file( $temp, "../Media/images/" . $hinhname );
+    move_uploaded_file($temp, "../Media/images/".$hinhname);
 
-    $temp = $_FILES[ "hinh_1" ][ "tmp_name" ];
+    $temp1 = $_FILES[ "hinh_1" ][ "tmp_name" ];
     $hinhname1 = $_FILES[ "hinh_1" ][ "name" ];
     $handle = fopen( $_FILES[ "hinh_1" ][ "tmp_name" ], 'r' );
-    move_uploaded_file( $temp, "../Media/images/" . $hinhname );
+    move_uploaded_file($temp1, "../Media/images/".$hinhname1);
 
-    $temp = $_FILES[ "hinh_2" ][ "tmp_name" ];
+    $temp2 = $_FILES[ "hinh_2" ][ "tmp_name" ];
     $hinhname2 = $_FILES[ "hinh_2" ][ "name" ];
     $handle = fopen( $_FILES[ "hinh_2" ][ "tmp_name" ], 'r' );
-    move_uploaded_file( $temp, "../Media/images/" . $hinhname );
+    move_uploaded_file($temp2, "../Media/images/".$hinhname2);
 
-    $temp = $_FILES[ "hinh_3" ][ "tmp_name" ];
+    $temp3 = $_FILES[ "hinh_3" ][ "tmp_name" ];
     $hinhname3 = $_FILES[ "hinh_3" ][ "name" ];
     $handle = fopen( $_FILES[ "hinh_3" ][ "tmp_name" ], 'r' );
-    move_uploaded_file( $temp, "../Media/images/" . $hinhname );
+    move_uploaded_file($temp3, "../Media/images/".$hinhname3);
 
     $status = $_POST[ "status" ];
     $new = $_POST[ "new" ];
@@ -52,14 +47,29 @@ if ( isset( $_POST[ "btn_Them" ] ) ) {
 
     $theloai_id = $_POST[ "theloai_id" ];
 
+    ///////////////////////////////////////////////////////////////// RÊSTet AI
+        $num=0;
+        $sql_news_rs="UPDATE tblproducts SET pID = $num := ($num+1)";
+        mysqli_query($conn,$sql_news_rs);
+        $sql_news_rs1="ALTER TABLE tblproducts AUTO_INCREMENT = 1";
+        mysqli_query($conn,$sql_news_rs1);
+        /////////////////////////////////////////////////////////////////
+        $sql = "INSERT INTO 	tblproducts(pID,pName,pDescript,pYear,pColor,pPrice,pStatus,mafacID,cateID,pNew,pSale,pEngine,pTranmiss,pX,pY,pZ,pFbrakes,pRbrakes,pWeight)
+        VALUES (DEFAULT,'$name','$noidung','$year','$color','$price','$status','$nsx_id','$theloai_id','$new','$sale','$eng','$tran','$x','$y','$z','$fbr','$rbr','$wei')";
+        mysqli_query( $conn, $sql );
+    
+///////////////////////////////////////////////////////////////// RÊSTet AI
+        $num_1=0;
+        $sql_news_rs="UPDATE tblimg SET pID = $num_1 := ($num_1+1)";
+        mysqli_query($conn,$sql_news_rs);
+        $sql_news_rs1="ALTER TABLE tblimg AUTO_INCREMENT = 1";
+        mysqli_query($conn,$sql_news_rs1);
+        /////////////////////////////////////////////////////////////////
+        $sql1 = "INSERT INTO tblimg(iID,img_main,img1,img2,img3) VALUES ((SELECT pID FROM tblproducts ORDER BY pID DESC LIMIT 1),'Media/images/$hinhname','Media/images/$hinhname1','Media/images/$hinhname2','Media/images/$hinhname3')";
+        mysqli_query( $conn, $sql1 );
+        header( 'location:quantri_xe.php' );
 
-    $sql = "INSERT INTO 	tblproducts(pID,pName,pDescript,pYear,pColor,pPrice,pStatus,mafacID,cateID,pNew,pSale,pEngine,pTranmiss,pX,pY,pZ,pFbrakes,pRbrakes,pWeight)
-	VALUES (DEFAULT,'$name','$noidung','$year','$color','$price','$status','$nsx_id','$theloai_id','$new','$sale','$eng','$tran','$x','$y','$z','$fbr','$rbr','$wei')";
-    mysqli_query( $conn, $sql );
-
-    $sql1 = "INSERT INTO tblimg((SELECT pID FROM tblproducts ORDER BY pID DESC LIMIT 1),'Media/images/$hinhname','Media/images/$hinhname1','Media/images/$hinhname2','Media/images/$hinhname3')";
-    header( 'location:quantri_xe.php' );
-    echo mysqli_error( $conn );
+        echo mysqli_error( $conn );
 }
 ?>
 
